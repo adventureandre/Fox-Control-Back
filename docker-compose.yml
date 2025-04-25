@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  fox-dashboard-pg:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=foxapp
+      - POSTGRESQL_PASSWORD=foxapp
+      - POSTGRESQL_DATABASE=foxdashboard

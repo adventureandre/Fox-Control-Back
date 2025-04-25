@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// enum Role {
+//   ADMIN
+//   MEMBER
+// }
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  password_hash String
+  // role          Role     @default(MEMBER)
+  created_at    DateTime @default(now())
+
+  @@map("users")
+}
+
+enum TransacaoTipo {
+  CREDITO
+  DEBITO
+}
+
+model Transaction {
+  id         String        @id @default(cuid())
+  date       DateTime
+  nome       String
+  valor      Float
+  tipo       TransacaoTipo
+  conta      String
+  categoria  String?
+  conciliado Boolean       @default(false)
+  created_at DateTime      @default(now())
+
+  @@map("transactions")
+}
