@@ -1,30 +1,36 @@
+import { prisma } from '@/lib/prisma'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createBodySchema = z.object({
-    title: z.string(),
-    description: z.string().nullable(),
-    phone: z.string().nullable(),
-    latitude: z.number().refine((value) => {
-      return Math.abs(value) <= 90
+    nome: z.string(),
+    date: z.string().transform((date) => new Date(date)),
+    valor: z.string().transform((valor) => {
+      return parseFloat(valor)
     }),
-    longitude: z.number().refine((value) => {
-      return Math.abs(value) <= 180
-    }),
+    tipo: z.enum(['DEBITO', 'CREDITO']),
+    categoria: z.string().nullable().optional(),
   })
 
-  const { title, description, phone, latitude, longitude } =
-    createBodySchema.parse(request.body)
+  const { nome, categoria, date, tipo, valor } = createBodySchema.parse(
+    request.body,
+  )
+
+  const transaction = await prisma.transaction.create({
+    data: {
+      nome,
+      date,
+      valor,
+      tipo,
+      categoria: categoria ?? null,
+      conta: 'manual',
+      conciliado: false,
+    },
+  })
 
   return reply.status(201).send({
     message: 'Transação criada com sucesso',
-    data: {
-      title,
-      description,
-      phone,
-      latitude,
-      longitude,
-    },
+    data: transaction,
   })
 }
