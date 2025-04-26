@@ -1,32 +1,41 @@
-# App
+# Desapega Vendas – Dashboard Financeiro
 
-GymPass style app.
+Dashboard para controle e visualização de transações financeiras a partir de arquivos OFX, com backend em Fastify e frontend em Angular.
 
-## RFs (Requisitos funcionais)
+## ✅ Funcionalidades (RFs)
 
-- [x] Deve ser possível se cadastrar;
-- [x] Deve ser possível se autenticar;
-- [x] Deve ser possível obter o perfil de um usuário logado;
-- [x] Deve ser possível obter o número de check-ins realizados pelo usuário logado;
-- [x] Deve ser possível o usuário obter o seu histórico de check-ins;
-- [x] Deve ser possível o usuário buscar academias próximas (até 10km);
-- [x] Deve ser possível o usuário buscar academias pelo nome;
-- [x] Deve ser possível o usuário realizar check-in em uma academia;
-- [x] Deve ser possível validar o check-in de um usuário;
-- [x] Deve ser possível cadastrar uma academia;
+- [x] Upload de arquivos .OFX
+- [x] Extração e persistência de transações no banco de dados
+- [x] Listagem de transações no painel
+- [ ] Filtros por data, tipo (débito/crédito) e conta
+- [ ] Marcar transações como conciliadas
+- [ ] Edição de transações (nome, categoria etc.)
+- [ ] Geração de relatórios/exportação CSV
 
-## RNs (Regras de negócio)
+## 🔐 Regras de negócio (RNs)
 
-- [x] O usuário não deve poder se cadastrar com um e-mail duplicado;
-- [x] O usuário não pode fazer 2 check-ins no mesmo dia;
-- [x] O usuário não pode fazer check-in se não estiver perto (100m) da academia;
-- [x] O check-in só pode ser validado até 20 minutos após ser criado;
-- [X] O check-in só pode ser validado por administradores;
-- [X] A academia só pode ser cadastrada por administradores;
+- [ ] Arquivos OFX inválidos devem ser rejeitados
+- [ ] Transações duplicadas (mesma data, valor, nome) não devem ser cadastradas novamente
+- [ ] Tipos de transação devem ser normalizados (CREDITO/DEBITO)
+- [ ] Todas transações devem estar associadas a uma conta
 
-## RNFs (Requisitos não-funcionais)
+## 🛠️ Tecnologias
 
-- [x] A senha do usuário precisa estar criptografada;
-- [x] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
-- [x] Todas listas de dados precisam estar paginadas com 20 itens por página;
-- [X] O usuário deve ser identificado por um JWT (JSON Web Token);
+- Backend: Fastify + Prisma + PostgreSQL
+- Frontend: Angular + Angular Material (ou Fuse Components)
+- Parsing de OFX: ofx-js
+- Autenticação: JWT
+- Upload de arquivos: @fastify/multipart
+
+## 🧪 Testes
+
+- [X] Testes de unidade para parse de OFX
+- [ ] Testes de integração para rotas de upload e listagem
+- [ ] Testes e2e no frontend
+
+## 📦 Requisitos não-funcionais (RNFs)
+
+- [x] Banco de dados PostgreSQL
+- [x] Suporte a múltiplas contas e múltiplos arquivos
+- [x] Identificação do usuário com JWT
+- [x] Padrão RESTful nas rotas
