@@ -16,6 +16,8 @@ model User {
   id            String   @id @default(cuid())
   name          String
   email         String   @unique
+  avatar        String?
+  status        String   @default("active")
   password_hash String
   // role          Role     @default(MEMBER)
   created_at    DateTime @default(now())

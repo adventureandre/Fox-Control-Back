@@ -6,6 +6,7 @@ import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
 import { transacoesRoutes } from './http/controllers/transactions/routes'
 import fastifyMultipart from '@fastify/multipart'
+import fastifyCors from '@fastify/cors'
 
 export const app = fastify()
 
@@ -20,6 +21,9 @@ app.register(fastifyJwt, {
   },
 })
 
+app.register(fastifyCors, {
+  origin: true,
+})
 app.register(fastifyCookie)
 app.register(fastifyMultipart)
 

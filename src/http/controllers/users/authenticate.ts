@@ -24,7 +24,7 @@ export async function authenticate(
 
     const token = await reply.jwtSign(
       {
-        role: user.role,
+        // role: user.role,
       },
       {
         sign: {
@@ -35,7 +35,7 @@ export async function authenticate(
 
     const refreshToken = await reply.jwtSign(
       {
-        role: user.role,
+        // role: user.role,
       },
       {
         sign: {
@@ -55,6 +55,7 @@ export async function authenticate(
       .status(200)
       .send({
         token,
+        user: { ...user, password_hash: undefined },
       })
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
