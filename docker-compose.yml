@@ -9,3 +9,4 @@ services:
       - POSTGRESQL_USERNAME=foxapp
       - POSTGRESQL_PASSWORD=foxapp
       - POSTGRESQL_DATABASE=foxdashboard
+    restart: always

@@ -18,6 +18,7 @@ model User {
   email         String   @unique
   avatar        String?
   status        String   @default("active")
+  phone         String?
   password_hash String
   // role          Role     @default(MEMBER)
   created_at    DateTime @default(now())

@@ -37,7 +37,6 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
     // Parsear o conteúdo do OFX
     const parsedOfx = await parseOFX(fileBuffer.toString())
     const data: Transaction[] = extractTransactionsFormOFX(parsedOfx)
-    console.log(data)
 
     data.map((transaction) => {
       const createTransactionsUseCase = makeCreateTransactionsUseCase()

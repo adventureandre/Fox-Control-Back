@@ -8,15 +8,26 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
     parsedOfx.OFX.BANKMSGSRSV1.STMTTRNRS.STMTRS.BANKACCTFROM.ACCTID ||
     'desconhecida'
 
-  return transacoes.map((item: any) => ({
-    date: parseOfxDate(item.DTPOSTED),
-    nome: item.MEMO,
-    valor: parseFloat(item.TRNAMT),
-    tipo: item.TRNTYPE === 'CREDIT' ? 'CREDITO' : 'DEBITO',
-    conta,
-    categoria: null,
-    conciliado: false,
-  }))
+  return transacoes.map((item: any) => {
+    // Obter o valor numérico da transação
+    const valorOriginal = parseFloat(item.TRNAMT)
+
+    // Determinar o tipo baseado no sinal do valor ou no campo TRNTYPE
+    const tipo = valorOriginal >= 0 ? 'CREDITO' : 'DEBITO'
+
+    // Sempre armazenar o valor absoluto (positivo)
+    const valorPositivo = Math.abs(valorOriginal)
+
+    return {
+      date: parseOfxDate(item.DTPOSTED),
+      nome: item.MEMO,
+      valor: valorPositivo,
+      tipo,
+      conta,
+      categoria: null,
+      conciliado: false,
+    }
+  })
 }
 
 // utils/formatDate.ts
