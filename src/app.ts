@@ -7,6 +7,8 @@ import fastifyCookie from '@fastify/cookie'
 import { transacoesRoutes } from './http/controllers/transactions/routes'
 import fastifyMultipart from '@fastify/multipart'
 import fastifyCors from '@fastify/cors'
+import fastifyStatic from '@fastify/static'
+import path from 'node:path'
 
 export const app = fastify()
 
@@ -29,6 +31,12 @@ app.register(fastifyMultipart)
 
 app.register(usersRoutes)
 app.register(transacoesRoutes)
+
+app.register(fastifyStatic, {
+  root: path.join(__dirname, '..', 'uploads'),
+  prefix: '/uploads/',
+  decorateReply: false,
+})
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

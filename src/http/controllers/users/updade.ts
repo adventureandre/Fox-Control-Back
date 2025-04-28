@@ -1,17 +1,76 @@
-import { makeGetUserProfileUseCase } from '@/use-cases/factories/make-get-user-profile-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { z } from 'zod'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { makeUpdateUserUseCase } from '@/use-cases/factories/make-update-user-use-case'
 
 export async function updade(request: FastifyRequest, reply: FastifyReply) {
+  // Garante que o usuário está autenticado
   await request.jwtVerify()
 
-  const getUserProfile = makeGetUserProfileUseCase()
-
-  const { user } = await getUserProfile.execute({
-    userId: request.user.sub,
+  // Valida os dados de entrada
+  const updateBodySchema = z.object({
+    name: z.string().min(3).optional(),
+    email: z.string().email().optional(),
+    avatar_url: z.string().url().optional(),
   })
 
-  return reply.status(200).send({
-    ...user,
-    password_hash: undefined,
-  })
+  try {
+    // Obtém o ID do usuário autenticado
+    const userId = request.user.sub
+
+    // Valida os dados do corpo da requisição
+    const { name, email, avatar_url } = updateBodySchema.parse(request.body)
+
+    // Verifica se pelo menos um campo foi fornecido
+    if (!name && !email && !avatar_url) {
+      return reply.status(400).send({
+        message: 'Pelo menos um campo deve ser fornecido para atualização.',
+      })
+    }
+
+    const updateUserUseCase = makeUpdateUserUseCase()
+
+    // Executa o caso de uso
+    const { user } = await updateUserUseCase.execute({
+      userId,
+      name,
+      email,
+      avatar_url,
+    })
+
+    // Retorna o usuário atualizado, removendo o campo password_hash
+    return reply.status(200).send({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar_url: user.avatar,
+        created_at: user.created_at,
+      },
+    })
+  } catch (error) {
+    // Tratamento de erros específicos
+    if (error instanceof ResourceNotFoundError) {
+      return reply.status(404).send({ message: 'Usuário não encontrado.' })
+    }
+
+    if (error instanceof z.ZodError) {
+      return reply.status(400).send({
+        message: 'Dados de entrada inválidos.',
+        issues: error.format(),
+      })
+    }
+
+    // Verifica se é erro de email já utilizado
+    if (
+      error instanceof Error &&
+      error.message === 'E-mail já está sendo utilizado.'
+    ) {
+      return reply.status(400).send({ message: error.message })
+    }
+
+    // Qualquer outro erro
+    console.error(error)
+    return reply.status(500).send({ message: 'Erro interno do servidor.' })
+  }
 }
