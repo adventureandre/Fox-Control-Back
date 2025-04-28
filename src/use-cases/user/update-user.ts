@@ -7,6 +7,7 @@ interface UpdateUserUseCaseRequest {
   name?: string
   email?: string
   avatar_url?: string
+  phone?: string
 }
 
 interface UpdateUserUseCaseResponse {
@@ -21,6 +22,7 @@ export class UpdateUserUseCase {
     name,
     email,
     avatar_url,
+    phone,
   }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse> {
     // Verificar se o usuário existe
     const userExists = await this.usersRepository.findById(userId)
@@ -47,6 +49,10 @@ export class UpdateUserUseCase {
       }
 
       data.email = email
+    }
+
+    if (phone !== undefined) {
+      data.phone = phone
     }
 
     if (avatar_url !== undefined) {

@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 import { makeUpdateUserUseCase } from '@/use-cases/factories/make-update-user-use-case'
 
-export async function updade(request: FastifyRequest, reply: FastifyReply) {
+export async function update(request: FastifyRequest, reply: FastifyReply) {
   // Garante que o usuário está autenticado
   await request.jwtVerify()
 
@@ -12,6 +12,7 @@ export async function updade(request: FastifyRequest, reply: FastifyReply) {
     name: z.string().min(3).optional(),
     email: z.string().email().optional(),
     avatar_url: z.string().url().optional(),
+    phone: z.string().optional(),
   })
 
   try {
@@ -19,7 +20,11 @@ export async function updade(request: FastifyRequest, reply: FastifyReply) {
     const userId = request.user.sub
 
     // Valida os dados do corpo da requisição
-    const { name, email, avatar_url } = updateBodySchema.parse(request.body)
+    const { name, email, avatar_url, phone } = updateBodySchema.parse(
+      request.body,
+    )
+
+    console.log('Avatar: ', avatar_url)
 
     // Verifica se pelo menos um campo foi fornecido
     if (!name && !email && !avatar_url) {
@@ -36,6 +41,7 @@ export async function updade(request: FastifyRequest, reply: FastifyReply) {
       name,
       email,
       avatar_url,
+      phone,
     })
 
     // Retorna o usuário atualizado, removendo o campo password_hash
@@ -44,7 +50,7 @@ export async function updade(request: FastifyRequest, reply: FastifyReply) {
         id: user.id,
         name: user.name,
         email: user.email,
-        avatar_url: user.avatar,
+        avatar_url: user.avatar_url,
         created_at: user.created_at,
       },
     })
