@@ -4,7 +4,7 @@
   "description": "Dashboard Fox",
   "main": "index.js",
   "scripts": {
-    "prestart:dev": "sudo docker compose up -d",
+    "prestart:dev": "docker compose up -d",
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "test:create-prisma-environment": "npm link ./prisma/vitest-environment-prisma",
