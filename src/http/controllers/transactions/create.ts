@@ -11,11 +11,12 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     }),
     tipo: z.enum(['DEBITO', 'CREDITO']),
     categoria: z.string().nullable().optional(),
+    conta: z.string().optional(),
+    concilado: z.boolean().optional(),
   })
 
-  const { nome, categoria, date, tipo, valor } = createBodySchema.parse(
-    request.body,
-  )
+  const { nome, categoria, date, tipo, valor, conta, concilado } =
+    createBodySchema.parse(request.body)
 
   const transaction = await prisma.transaction.create({
     data: {
@@ -24,8 +25,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       valor,
       tipo,
       categoria: categoria ?? null,
-      conta: 'manual',
-      conciliado: false,
+      conta: conta ?? 'manual',
+      conciliado: !!concilado,
     },
   })
 
