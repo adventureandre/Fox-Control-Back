@@ -47,15 +47,21 @@ export async function uploadImage(
 
     // Remover a imagem antiga, se existir
     if (user.avatar_url) {
-      const oldImagePath = path.resolve(
-        __dirname,
-        '../../../../uploads',
-        user.avatar_url.replace('/uploads/', ''),
+      // Extrair apenas o caminho relativo da URL
+      const relativePath = user.avatar_url.replace(/^https?:\/\/[^/]+/, '') // Remove o domínio da URL
+      const oldImagePath = path.join(
+        path.resolve(__dirname, '../../../../uploads'),
+        relativePath.replace('/uploads/', ''), // Remove o prefixo "/uploads/"
       )
+
       try {
+        await fs.access(oldImagePath) // Verifica se o arquivo existe
         await fs.unlink(oldImagePath) // Remove o arquivo antigo
       } catch (error) {
-        console.error('Erro ao remover a imagem antiga:', error)
+        console.error(
+          'Erro ao remover a imagem antiga ou arquivo não encontrado:',
+          error,
+        )
       }
     }
 
