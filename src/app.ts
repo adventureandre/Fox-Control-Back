@@ -36,7 +36,6 @@ app.register(transacoesRoutes)
 app.register(fastifyStatic, {
   root: path.join(__dirname, '..', 'uploads'),
   prefix: '/uploads/',
-  decorateReply: false,
 })
 
 app.setErrorHandler((error, _, reply) => {
