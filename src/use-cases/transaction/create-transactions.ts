@@ -8,7 +8,7 @@ interface CreateTransactionsUseCaseRequest {
   conta: string
   conciliado?: boolean
   categoria?: string | null
-  date: Date
+  date: string
 }
 
 interface CreateTransactionsUseCaseResponse {

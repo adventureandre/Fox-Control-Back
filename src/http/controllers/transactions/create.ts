@@ -5,7 +5,7 @@ import { z } from 'zod'
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createBodySchema = z.object({
     nome: z.string(),
-    date: z.string().transform((date) => new Date(date)),
+    date: z.string(),
     valor: z.string().transform((valor) => {
       return parseFloat(valor)
     }),
@@ -17,6 +17,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const { nome, categoria, date, tipo, valor, conta, concilado } =
     createBodySchema.parse(request.body)
+
+  console.log('data', date)
 
   const transaction = await prisma.transaction.create({
     data: {

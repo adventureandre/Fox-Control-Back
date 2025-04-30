@@ -33,7 +33,7 @@ enum TransacaoTipo {
 
 model Transaction {
   id         String        @id @default(cuid())
-  date       DateTime
+  date       String
   nome       String
   valor      Float
   tipo       TransacaoTipo
