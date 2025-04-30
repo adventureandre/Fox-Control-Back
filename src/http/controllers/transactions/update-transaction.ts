@@ -11,7 +11,7 @@ export async function updateTransaction(
     nome: z.string(),
     valor: z.number(),
     date: z.string(),
-    tipo: z.enum(['DEBITO', 'CREDITO']),
+    tipo: z.enum(['entrada', 'saida']),
     categoria: z.string().optional(),
     conciliado: z.boolean().optional(),
     conta: z.string().optional(),

@@ -3,12 +3,14 @@ import { Transaction } from '@prisma/client'
 
 interface CreateTransactionsUseCaseRequest {
   nome: string
-  tipo: 'DEBITO' | 'CREDITO'
+  tipo: 'saida' | 'entrada'
   valor: number
   conta: string
   conciliado?: boolean
   categoria?: string | null
   date: string
+  user_id: string
+  imported?: boolean
 }
 
 interface CreateTransactionsUseCaseResponse {
@@ -26,8 +28,12 @@ export class CreateTransactionsUseCase {
     valor,
     categoria,
     conciliado,
+    user_id,
+    imported
   }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
     const transaction = await this.transactionsRepository.create({
+      user_id,
+      imported,
       conta,
       date,
       nome,

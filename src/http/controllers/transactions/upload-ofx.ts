@@ -9,7 +9,7 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
 
   if (!ofxFile) {
     return reply.status(400).send({
-      message: 'Nemhum arquivo foi enviado.',
+      message: 'Nenhum arquivo foi enviado.',
     })
   }
 
@@ -38,13 +38,23 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
     const parsedOfx = await parseOFX(fileBuffer.toString())
     const data: Transaction[] = extractTransactionsFormOFX(parsedOfx)
 
-    data.map((transaction) => {
-      const createTransactionsUseCase = makeCreateTransactionsUseCase()
-      return createTransactionsUseCase.execute(transaction)
-    })
+    // Obtém o ID do usuário autenticado
+    const userId = request.user.sub
+
+    // Adiciona o user_id a cada transação e cria no banco
+    const createTransactionsUseCase = makeCreateTransactionsUseCase()
+    await Promise.all(
+      data.map((transaction) =>
+        createTransactionsUseCase.execute({
+          ...transaction,
+          user_id: userId,
+        }),
+      ),
+    )
 
     return reply.status(201).send({ message: 'Arquivo processado com sucesso' })
   } catch (error) {
+    console.error('Erro ao processar o arquivo OFX:', error)
     return reply
       .status(500)
       .send({ message: 'Erro ao processar o arquivo OFX' })

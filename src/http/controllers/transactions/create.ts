@@ -3,13 +3,15 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
+  // Obtém o ID do usuário autenticado
+  const userId = request.user.sub
+
+  // Valida o corpo da requisição
   const createBodySchema = z.object({
     nome: z.string(),
     date: z.string(),
-    valor: z.string().transform((valor) => {
-      return parseFloat(valor)
-    }),
-    tipo: z.enum(['DEBITO', 'CREDITO']),
+    valor: z.string().transform((valor) => parseFloat(valor)),
+    tipo: z.enum(['entrada', 'saida']),
     categoria: z.string().nullable().optional(),
     conta: z.string().optional(),
     concilado: z.boolean().optional(),
@@ -18,14 +20,14 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const { nome, categoria, date, tipo, valor, conta, concilado } =
     createBodySchema.parse(request.body)
 
-  console.log('data', date)
-
+  // Cria a transação associada ao usuário
   const transaction = await prisma.transaction.create({
     data: {
       nome,
       date,
       valor,
       tipo,
+      user_id: userId, // Associa a transação ao usuário
       categoria: categoria ?? null,
       conta: conta ?? 'manual',
       conciliado: !!concilado,
