@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import path from 'node:path'
 import fs from 'node:fs/promises'
 import { randomUUID } from 'node:crypto'
+import { prisma } from '@/lib/prisma'
 
 export async function uploadImage(
   request: FastifyRequest,
@@ -10,6 +11,8 @@ export async function uploadImage(
   request.jwtVerify()
 
   try {
+    const userId = request.user.sub
+
     const imageFile = await request.file({
       limits: {
         fileSize: 25 * 1024 * 1024, // 25MB
@@ -29,6 +32,37 @@ export async function uploadImage(
       return reply.status(400).send({
         message: 'Formato de imagem não permitido. Use JPEG, PNG ou WEBP.',
       })
+    }
+
+    // Obter o usuário do banco de dados
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    })
+
+    if (!user) {
+      return reply.status(404).send({
+        message: 'Usuário não encontrado.',
+      })
+    }
+
+    // Remover a imagem antiga, se existir
+    if (user.avatar_url) {
+      // Extrair apenas o caminho relativo da URL
+      const relativePath = user.avatar_url.replace(/^https?:\/\/[^/]+/, '') // Remove o domínio da URL
+      const oldImagePath = path.join(
+        path.resolve(__dirname, '../../../../uploads'),
+        relativePath.replace('/uploads/', ''), // Remove o prefixo "/uploads/"
+      )
+
+      try {
+        await fs.access(oldImagePath) // Verifica se o arquivo existe
+        await fs.unlink(oldImagePath) // Remove o arquivo antigo
+      } catch (error) {
+        console.error(
+          'Erro ao remover a imagem antiga ou arquivo não encontrado:',
+          error,
+        )
+      }
     }
 
     // Criar diretório base de uploads se não existir
@@ -54,6 +88,12 @@ export async function uploadImage(
 
     // Retorna o caminho da imagem incluindo a estrutura de ano/mês
     const imageUrl = `/uploads/${year}/${month}/${fileName}`
+
+    // Atualizar o avatar do usuário no banco de dados
+    await prisma.user.update({
+      where: { id: userId },
+      data: { avatar_url: imageUrl },
+    })
 
     return reply.status(200).send({
       message: 'Imagem enviada com sucesso.',

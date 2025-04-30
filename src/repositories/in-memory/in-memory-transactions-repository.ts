@@ -18,7 +18,7 @@ export class InMemoryTransactionsRepository implements TransactionRepository {
   async create(data: Transaction) {
     const transaction = {
       id: randomUUID(),
-      date: new Date(data.date),
+      date: data.date,
       nome: data.nome,
       tipo: data.tipo,
       valor: data.valor,

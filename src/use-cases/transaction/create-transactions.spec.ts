@@ -14,7 +14,7 @@ describe('Create Transaction Use Case', () => {
   it('should register a transaction', async () => {
     const { transaction } = await sut.execute({
       conta: '005444-8',
-      date: new Date('2023-10-01'),
+      date: '01-10-2023',
       nome: 'Salário Outubro',
       tipo: 'CREDITO',
       valor: 3000,
@@ -26,7 +26,7 @@ describe('Create Transaction Use Case', () => {
       expect.objectContaining({
         id: expect.any(String),
         conta: '005444-8',
-        date: new Date('2023-10-01'),
+        date: '01-10-2023',
         nome: 'Salário Outubro',
         tipo: 'CREDITO',
         valor: 3000,

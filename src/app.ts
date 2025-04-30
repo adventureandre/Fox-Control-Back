@@ -25,6 +25,7 @@ app.register(fastifyJwt, {
 
 app.register(fastifyCors, {
   origin: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
 })
 app.register(fastifyCookie)
 app.register(fastifyMultipart)
@@ -35,7 +36,6 @@ app.register(transacoesRoutes)
 app.register(fastifyStatic, {
   root: path.join(__dirname, '..', 'uploads'),
   prefix: '/uploads/',
-  decorateReply: false,
 })
 
 app.setErrorHandler((error, _, reply) => {

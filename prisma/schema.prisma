@@ -23,24 +23,30 @@ model User {
   // role          Role     @default(MEMBER)
   created_at    DateTime @default(now())
 
+  transactions Transaction[]
+
   @@map("users")
 }
 
 enum TransacaoTipo {
-  CREDITO
-  DEBITO
+  entrada
+  saida
 }
 
 model Transaction {
   id         String        @id @default(cuid())
-  date       DateTime
+  date       String
   nome       String
   valor      Float
   tipo       TransacaoTipo
   conta      String
   categoria  String?
+  imported   Boolean       @default(false)
   conciliado Boolean       @default(false)
   created_at DateTime      @default(now())
+
+  user   User   @relation(fields: [user_id], references: [id])
+  user_id String
 
   @@map("transactions")
 }

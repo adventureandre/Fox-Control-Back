@@ -13,7 +13,7 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
     const valorOriginal = parseFloat(item.TRNAMT)
 
     // Determinar o tipo baseado no sinal do valor ou no campo TRNTYPE
-    const tipo = valorOriginal >= 0 ? 'CREDITO' : 'DEBITO'
+    const tipo = valorOriginal >= 0 ? 'entrada' : 'saida'
 
     // Sempre armazenar o valor absoluto (positivo)
     const valorPositivo = Math.abs(valorOriginal)
@@ -25,7 +25,7 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
       tipo,
       conta,
       categoria: null,
-      conciliado: false,
+      conciliado: true,
     }
   })
 }
@@ -34,5 +34,5 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
 function parseOfxDate(ofxDate: string): string {
   return DateTime.fromFormat(ofxDate, "yyyyLLddHHmmss'[-3:BRT]'", {
     zone: 'utc',
-  }).toISO()!
+  }).toFormat('dd-MM-yyyy') // Formata a data no formato DD-MM-YYYY
 }
