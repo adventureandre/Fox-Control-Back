@@ -39,6 +39,7 @@ model Transaction {
   nome       String
   valor      Float
   tipo       TransacaoTipo
+  confirmed   Boolean       @default(false)
   conta      String
   categoria  String?
   imported   Boolean       @default(false)

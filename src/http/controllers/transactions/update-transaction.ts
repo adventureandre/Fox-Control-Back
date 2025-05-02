@@ -22,10 +22,21 @@ export async function updateTransaction(
     categoria: z.string().nullable().optional(),
     conciliado: z.boolean().optional(),
     conta: z.string().optional(),
+    confirmed: z.boolean().optional(),
+    imported: z.boolean().optional(),
   })
 
-  const { nome, valor, date, tipo, categoria, conciliado, conta } =
-    updateTransactionSchema.parse(request.body)
+  const {
+    nome,
+    valor,
+    date,
+    tipo,
+    categoria,
+    conciliado,
+    conta,
+    confirmed,
+    imported,
+  } = updateTransactionSchema.parse(request.body)
 
   const { id } = request.params as { id: string }
 
@@ -48,6 +59,8 @@ export async function updateTransaction(
         date,
         tipo,
         categoria,
+        confirmed,
+        imported,
         conta: conta ?? 'manual',
         conciliado: !!conciliado,
       },
