@@ -16,10 +16,11 @@ describe('Create Transaction Use Case', () => {
       conta: '005444-8',
       date: '01-10-2023',
       nome: 'Salário Outubro',
-      tipo: 'CREDITO',
+      tipo: 'entrada',
       valor: 3000,
       categoria: 'Salário',
       conciliado: true,
+      user_id: 'user-01',
     })
 
     expect(transaction).toEqual(
@@ -28,7 +29,7 @@ describe('Create Transaction Use Case', () => {
         conta: '005444-8',
         date: '01-10-2023',
         nome: 'Salário Outubro',
-        tipo: 'CREDITO',
+        tipo: 'saida',
         valor: 3000,
         categoria: 'Salário',
         conciliado: true,

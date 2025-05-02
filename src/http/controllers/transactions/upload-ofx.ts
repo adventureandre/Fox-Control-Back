@@ -36,23 +36,44 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
   try {
     // Parsear o conteúdo do OFX
     const parsedOfx = await parseOFX(fileBuffer.toString())
-    const data: Transaction[] = extractTransactionsFormOFX(parsedOfx)
+    const transactions: Transaction[] = extractTransactionsFormOFX(parsedOfx)
 
     // Obtém o ID do usuário autenticado
     const userId = request.user.sub
 
     // Adiciona o user_id a cada transação e cria no banco
     const createTransactionsUseCase = makeCreateTransactionsUseCase()
+
+    // Use Promise.all para esperar todas as transações serem criadas
     await Promise.all(
-      data.map((transaction) =>
-        createTransactionsUseCase.execute({
-          ...transaction,
+      transactions.map((transaction) => {
+        // Converte a data para o formato ISO se for uma string de data
+        let dateValue: string | Date = transaction.date as string | Date
+        if (typeof dateValue === 'string') {
+          if (dateValue.includes('T')) {
+            dateValue = new Date(dateValue)
+          } else {
+            dateValue = new Date(`${dateValue}T00:00:00.000Z`)
+          }
+        }
+
+        return createTransactionsUseCase.execute({
+          nome: transaction.nome,
+          valor: transaction.valor,
+          tipo: transaction.tipo,
+          conta: transaction.conta,
+          categoria: transaction.categoria,
+          conciliado: transaction.conciliado,
+          date: dateValue instanceof Date ? dateValue.toISOString() : dateValue,
           user_id: userId,
-        }),
-      ),
+        })
+      }),
     )
 
-    return reply.status(201).send({ message: 'Arquivo processado com sucesso' })
+    return reply.status(201).send({
+      message: 'Arquivo processado com sucesso',
+      count: transactions.length,
+    })
   } catch (error) {
     console.error('Erro ao processar o arquivo OFX:', error)
     return reply

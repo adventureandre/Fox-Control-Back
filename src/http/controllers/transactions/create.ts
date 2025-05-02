@@ -3,39 +3,41 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
-  // Obtém o ID do usuário autenticado
   const userId = request.user.sub
 
-  // Valida o corpo da requisição
   const createBodySchema = z.object({
     nome: z.string(),
-    date: z.string(),
-    valor: z.string().transform((valor) => parseFloat(valor)),
+    date: z.string().transform((val) => {
+      if (val.includes('T')) {
+        return new Date(val)
+      }
+      return new Date(`${val}T00:00:00.000Z`)
+    }),
+    valor: z.union([
+      z.string().transform((val) => parseFloat(parseFloat(val).toFixed(2))),
+      z.number().transform((val) => parseFloat(val.toFixed(2))),
+    ]),
     tipo: z.enum(['entrada', 'saida']),
     categoria: z.string().nullable().optional(),
     conta: z.string().optional(),
-    concilado: z.boolean().optional(),
+    conciliado: z.boolean().optional(),
   })
 
-  const { nome, categoria, date, tipo, valor, conta, concilado } =
+  const { nome, categoria, date, tipo, valor, conta, conciliado } =
     createBodySchema.parse(request.body)
 
-  // Cria a transação associada ao usuário
   const transaction = await prisma.transaction.create({
     data: {
       nome,
       date,
       valor,
       tipo,
-      user_id: userId, // Associa a transação ao usuário
-      categoria: categoria ?? null,
+      user_id: userId,
+      categoria,
       conta: conta ?? 'manual',
-      conciliado: !!concilado,
+      conciliado: !!conciliado,
     },
   })
 
-  return reply.status(201).send({
-    message: 'Transação criada com sucesso',
-    data: transaction,
-  })
+  return reply.status(201).send(transaction)
 }
