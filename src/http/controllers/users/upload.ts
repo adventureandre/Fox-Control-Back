@@ -8,11 +8,10 @@ export async function uploadImage(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  request.jwtVerify()
+  await request.jwtVerify()
+  const userId = request.user.sub
 
   try {
-    const userId = request.user.sub
-
     const imageFile = await request.file({
       limits: {
         fileSize: 25 * 1024 * 1024, // 25MB
@@ -98,6 +97,7 @@ export async function uploadImage(
     return reply.status(200).send({
       message: 'Imagem enviada com sucesso.',
       avatar_url: imageUrl,
+      user,
     })
   } catch (error) {
     console.error('Erro ao processar upload de imagem:', error)
