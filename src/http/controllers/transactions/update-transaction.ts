@@ -6,13 +6,20 @@ export async function updateTransaction(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  // Define o esquema de validação para os dados recebidos
   const updateTransactionSchema = z.object({
     nome: z.string(),
-    valor: z.number(),
-    date: z.string(),
+    valor: z.union([
+      z.string().transform((val) => parseFloat(parseFloat(val).toFixed(2))),
+      z.number().transform((val) => parseFloat(val.toFixed(2))),
+    ]),
+    date: z.string().transform((val) => {
+      if (val.includes('T')) {
+        return new Date(val)
+      }
+      return new Date(`${val}T00:00:00.000Z`)
+    }),
     tipo: z.enum(['entrada', 'saida']),
-    categoria: z.string().optional(),
+    categoria: z.string().nullable().optional(),
     conciliado: z.boolean().optional(),
     conta: z.string().optional(),
   })
@@ -23,7 +30,6 @@ export async function updateTransaction(
   const { id } = request.params as { id: string }
 
   try {
-    // Verifica se a transação existe antes de atualizar
     const existingTransaction = await prisma.transaction.findUnique({
       where: { id },
     })
@@ -37,14 +43,13 @@ export async function updateTransaction(
         id,
       },
       data: {
-        id,
         nome,
         valor,
         date,
         tipo,
         categoria,
-        conciliado,
-        conta,
+        conta: conta ?? 'manual',
+        conciliado: !!conciliado,
       },
     })
 

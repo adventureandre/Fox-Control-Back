@@ -12,7 +12,7 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
     // Obter o valor numérico da transação
     const valorOriginal = parseFloat(item.TRNAMT)
 
-    // Determinar o tipo baseado no sinal do valor ou no campo TRNTYPE
+    // Determinar o tipo baseado no sinal do valor
     const tipo = valorOriginal >= 0 ? 'entrada' : 'saida'
 
     // Sempre armazenar o valor absoluto (positivo)
@@ -30,9 +30,9 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
   })
 }
 
-// utils/formatDate.ts
+// Função para converter a data do OFX para DateTime
 function parseOfxDate(ofxDate: string): string {
   return DateTime.fromFormat(ofxDate, "yyyyLLddHHmmss'[-3:BRT]'", {
     zone: 'utc',
-  }).toFormat('dd-MM-yyyy') // Formata a data no formato DD-MM-YYYY
+  }).toFormat('yyyy-MM-dd') // Retorna string no formato 'YYYY-MM-DD'
 }

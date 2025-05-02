@@ -1,6 +1,6 @@
-import { Transaction } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 import { TransactionRepository } from '../transaction-repository'
+import { Prisma, Transaction } from '@prisma/client'
 
 export class InMemoryTransactionsRepository implements TransactionRepository {
   public items: Transaction[] = []
@@ -15,10 +15,11 @@ export class InMemoryTransactionsRepository implements TransactionRepository {
     return transaction
   }
 
-  async create(data: Transaction) {
+  async create(data: Prisma.TransactionCreateInput) {
     const transaction = {
       id: randomUUID(),
-      date: data.date,
+      user_id: data.user_id ?? '',
+      date: new Date(data.date),
       nome: data.nome,
       tipo: data.tipo,
       valor: data.valor,
@@ -26,10 +27,11 @@ export class InMemoryTransactionsRepository implements TransactionRepository {
       conciliado: data.conciliado ?? false,
       categoria: data.categoria ?? null,
       created_at: new Date(),
+      imported: data.imported ?? false,
     }
 
-    this.items.push(transaction)
+    this.items.push(transaction as Transaction)
 
-    return transaction
+    return transaction as Transaction
   }
 }
