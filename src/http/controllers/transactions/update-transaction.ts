@@ -1,4 +1,5 @@
-import { prisma } from '@/lib/prisma'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { makeUpdateTransactionUseCase } from '@/use-cases/factories/make-update-transaction-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -41,33 +42,26 @@ export async function updateTransaction(
   const { id } = request.params as { id: string }
 
   try {
-    const existingTransaction = await prisma.transaction.findUnique({
-      where: { id },
-    })
-
-    if (!existingTransaction) {
-      return reply.status(404).send({ error: 'Transação não encontrada' })
-    }
-
-    const transaction = await prisma.transaction.update({
-      where: {
-        id,
-      },
-      data: {
-        nome,
-        valor,
-        date,
-        tipo,
-        categoria,
-        confirmed,
-        imported,
-        conta: conta ?? 'manual',
-        conciliado: !!conciliado,
-      },
+    const updateTransactionUseCase = makeUpdateTransactionUseCase()
+    const transaction = await updateTransactionUseCase.execute({
+      id,
+      nome,
+      valor,
+      date,
+      tipo,
+      categoria,
+      conciliado,
+      conta,
+      confirmed,
+      imported,
     })
 
     return reply.status(200).send(transaction)
   } catch (error) {
+    if (error instanceof ResourceNotFoundError) {
+      return reply.status(404).send({ error: 'Transação não encontrada' })
+    }
+
     console.error('Erro ao atualizar transação:', error)
     return reply.status(500).send({ error: 'Erro ao atualizar transação' })
   }
