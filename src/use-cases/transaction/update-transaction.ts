@@ -6,7 +6,7 @@ interface UpdateTransactionUseCaseRequest {
   valor: number
   date: Date
   tipo: 'entrada' | 'saida'
-  categoria?: string | null
+  categoria?: number | null
   conciliado?: boolean
   conta?: string
   imported?: boolean

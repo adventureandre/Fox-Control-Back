@@ -20,7 +20,7 @@ export async function updateTransaction(
       return new Date(`${val}T00:00:00.000Z`)
     }),
     tipo: z.enum(['entrada', 'saida']),
-    categoria: z.string().nullable().optional(),
+    categoria: z.number().nullable().optional(),
     conciliado: z.boolean().optional(),
     conta: z.string().optional(),
     confirmed: z.boolean().optional(),

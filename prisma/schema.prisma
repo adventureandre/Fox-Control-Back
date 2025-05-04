@@ -41,7 +41,7 @@ model Transaction {
   tipo       TransacaoTipo
   confirmed  Boolean       @default(false)
   conta      String
-  categoria  String?
+  categoria  Int?
   imported   Boolean       @default(false)
   conciliado Boolean       @default(false)
   created_at DateTime      @default(now())
@@ -53,12 +53,11 @@ model Transaction {
 }
 
 model Category {
-  id          Int     @id @default(autoincrement())
-  code        String
+  code         Int     @id @unique
   level       Int
   description String
   parent_id   Int?
-  parent      Category?  @relation("CategoryToSubcategories", fields: [parent_id], references: [id])
+  parent      Category?  @relation("CategoryToSubcategories", fields: [parent_id], references: [code])
   children    Category[] @relation("CategoryToSubcategories")
 
   @@map("categories")

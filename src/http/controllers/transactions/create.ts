@@ -18,7 +18,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       z.number().transform((val) => parseFloat(val.toFixed(2))),
     ]),
     tipo: z.enum(['entrada', 'saida']),
-    categoria: z.string().nullable().optional(),
+    categoria: z.number().nullable().optional(),
     conta: z.string().optional(),
     conciliado: z.boolean().optional(),
   })

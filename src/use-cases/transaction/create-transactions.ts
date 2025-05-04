@@ -6,7 +6,7 @@ interface CreateTransactionsUseCaseRequest {
   valor: number
   date: Date
   tipo: 'entrada' | 'saida'
-  categoria?: string | null
+  categoria?: number | null
   conciliado?: boolean
   conta: string
   user_id: string
