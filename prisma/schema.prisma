@@ -60,4 +60,6 @@ model Category {
   parent_id   Int?
   parent      Category?  @relation("CategoryToSubcategories", fields: [parent_id], references: [id])
   children    Category[] @relation("CategoryToSubcategories")
+
+  @@map("categories")
 }

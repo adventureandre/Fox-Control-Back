@@ -9,6 +9,7 @@ import fastifyMultipart from '@fastify/multipart'
 import fastifyCors from '@fastify/cors'
 import fastifyStatic from '@fastify/static'
 import path from 'node:path'
+import { categoriesRoutes } from './http/controllers/categories/routes'
 
 export const app = fastify()
 
@@ -30,9 +31,12 @@ app.register(fastifyCors, {
 app.register(fastifyCookie)
 app.register(fastifyMultipart)
 
+// Routes
 app.register(usersRoutes)
 app.register(transacoesRoutes)
+app.register(categoriesRoutes)
 
+// Pagina statica de uploads
 app.register(fastifyStatic, {
   root: path.join(__dirname, '..', 'uploads'),
   prefix: '/uploads/',
