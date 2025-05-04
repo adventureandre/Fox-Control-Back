@@ -1,5 +1,5 @@
 import { PrismaTransacoesRepository } from '@/repositories/prisma/prisma-transacoes-repository'
-import { CreateTransactionsUseCase } from '../transaction/create-transactions'
+import { CreateTransactionsUseCase } from '../../transaction/create-transactions'
 
 export function makeCreateTransactionsUseCase() {
   const transactionsRepository = new PrismaTransacoesRepository()

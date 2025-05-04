@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
-import { makeUpdateUserUseCase } from '@/use-cases/factories/make-update-user-use-case'
+import { makeUpdateUserUseCase } from '@/use-cases/factories/user/make-update-user-use-case'
 
 export async function update(request: FastifyRequest, reply: FastifyReply) {
   // Garante que o usuário está autenticado

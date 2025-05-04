@@ -1,4 +1,4 @@
-import { makeCreateTransactionsUseCase } from '@/use-cases/factories/make-create-transactions-use-case'
+import { makeCreateTransactionsUseCase } from '@/use-cases/factories/transaction/make-create-transactions-use-case'
 import { extractTransactionsFormOFX } from '@/utils/parse-ofx-transactions'
 import { Transaction } from '@prisma/client'
 import { FastifyReply, FastifyRequest } from 'fastify'

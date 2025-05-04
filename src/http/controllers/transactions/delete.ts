@@ -1,4 +1,6 @@
-import { prisma } from '@/lib/prisma'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { UnauthorizedError } from '@/use-cases/errors/unauthorized-error'
+import { makeDeleteTransactionUseCase } from '@/use-cases/factories/user/make-delete-transaction-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 export async function deleteTransaction(
@@ -10,29 +12,24 @@ export async function deleteTransaction(
   const userId = request.user.sub
 
   try {
-    // Verifica se a transação existe
-    const transaction = await prisma.transaction.findUnique({
-      where: { id },
+    const deleteTransactionsUseCase = makeDeleteTransactionUseCase()
+    deleteTransactionsUseCase.execute({
+      id,
+      userId,
     })
 
-    if (!transaction) {
+    return reply.status(204).send()
+  } catch (error) {
+    if (error instanceof ResourceNotFoundError) {
       return reply.status(404).send({ error: 'Transação não encontrada' })
     }
 
-    // Verifica se a transação pertence ao usuário
-    if (transaction.user_id !== userId) {
+    if (error instanceof UnauthorizedError) {
       return reply
         .status(403)
         .send({ error: 'Acesso negado: Você nao pode deleta essa Transação' })
     }
 
-    // Deleta a transação
-    await prisma.transaction.delete({
-      where: { id },
-    })
-
-    return reply.status(204).send()
-  } catch (error) {
     console.error(error)
   }
 }

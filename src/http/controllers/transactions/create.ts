@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { makeCreateTransactionsUseCase } from '@/use-cases/factories/transaction/make-create-transactions-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -26,8 +26,9 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const { nome, categoria, date, tipo, valor, conta, conciliado } =
     createBodySchema.parse(request.body)
 
-  const transaction = await prisma.transaction.create({
-    data: {
+  try {
+    const createTransactionsUseCase = makeCreateTransactionsUseCase()
+    const transaction = await createTransactionsUseCase.execute({
       nome,
       date,
       valor,
@@ -36,8 +37,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       categoria,
       conta: conta ?? 'manual',
       conciliado: !!conciliado,
-    },
-  })
+    })
 
-  return reply.status(201).send(transaction)
+    return reply.status(201).send(transaction)
+  } catch (error) {
+    console.error('Erro ao criar transação:', error)
+    return reply.status(500).send({ error: 'Internal Server Error' })
+  }
 }

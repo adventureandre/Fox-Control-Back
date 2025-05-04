@@ -1,5 +1,5 @@
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
-import { makeUpdateTransactionUseCase } from '@/use-cases/factories/make-update-transaction-use-case'
+import { makeUpdateTransactionUseCase } from '@/use-cases/factories/transaction/make-update-transaction-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 

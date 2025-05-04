@@ -1,4 +1,3 @@
-import { prisma } from '@/lib/prisma'
 import { TransactionRepository } from '@/repositories/transaction-repository'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 interface UpdateTransactionUseCaseRequest {
@@ -30,29 +29,22 @@ export class UpdateTransactionUseCase {
     imported,
   }: UpdateTransactionUseCaseRequest) {
     try {
-      const existingTransaction = await prisma.transaction.findUnique({
-        where: { id },
-      })
+      const existingTransaction = await this.transactionsRepository.findById(id)
 
       if (!existingTransaction) {
         throw new ResourceNotFoundError()
       }
 
-      const transaction = await prisma.transaction.update({
-        where: {
-          id,
-        },
-        data: {
-          nome,
-          valor,
-          date,
-          tipo,
-          categoria,
-          confirmed,
-          imported,
-          conta: conta ?? 'manual',
-          conciliado: !!conciliado,
-        },
+      const transaction = await this.transactionsRepository.update(id, {
+        nome,
+        valor,
+        date,
+        tipo,
+        categoria,
+        confirmed,
+        imported,
+        conta: conta ?? 'manual',
+        conciliado: !!conciliado,
       })
 
       return transaction
