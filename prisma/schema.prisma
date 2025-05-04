@@ -39,15 +39,25 @@ model Transaction {
   nome       String
   valor      Float
   tipo       TransacaoTipo
-  confirmed   Boolean       @default(false)
+  confirmed  Boolean       @default(false)
   conta      String
   categoria  String?
   imported   Boolean       @default(false)
   conciliado Boolean       @default(false)
   created_at DateTime      @default(now())
 
-  user   User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id])
   user_id String
 
   @@map("transactions")
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  code        String
+  level       Int
+  description String
+  parent_id   Int?
+  parent      Category?  @relation("CategoryToSubcategories", fields: [parent_id], references: [id])
+  children    Category[] @relation("CategoryToSubcategories")
 }
