@@ -5,7 +5,6 @@ interface UpdateTransactionUseCaseRequest {
   nome: string
   valor: number
   date: Date
-  tipo: 'entrada' | 'saida'
   categoria?: number | null
   conciliado?: boolean
   conta?: string
@@ -20,7 +19,6 @@ export class UpdateTransactionUseCase {
     id,
     nome,
     date,
-    tipo,
     valor,
     categoria,
     conciliado,
@@ -39,7 +37,6 @@ export class UpdateTransactionUseCase {
         nome,
         valor,
         date,
-        tipo,
         categoria,
         confirmed,
         imported,

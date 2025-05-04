@@ -1,36 +1,37 @@
-import { PrismaClient, Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 import { CategoriesRepository } from '../categories-repository'
-
-const prisma = new PrismaClient()
+import { prisma } from '@/lib/prisma'
 
 export class PrismaCategoriesRepository implements CategoriesRepository {
   async findAll() {
-    return prisma.category.findMany()
+    return await prisma.category.findMany()
   }
 
-  async findById(id: number) {
-    return prisma.category.findUnique({
-      where: { id },
+  async findById(code: number) {
+    return await prisma.category.findUnique({
+      where: {
+        code,
+      },
     })
   }
 
   async create(data: Prisma.CategoryCreateInput) {
-    return prisma.category.create({
+    return await prisma.category.create({
       data,
     })
   }
 
-  async update(params: { id: number; data: Prisma.CategoryCreateInput }) {
-    const { id, data } = params
-    return prisma.category.update({
-      where: { id },
+  async update(params: { code: number; data: Prisma.CategoryCreateInput }) {
+    const { code, data } = params
+    return await prisma.category.update({
+      where: { code },
       data,
     })
   }
 
-  async delete(id: number) {
-    await prisma.category.delete({
-      where: { id },
+  async delete(code: number) {
+    return await prisma.category.delete({
+      where: { code },
     })
   }
 }

@@ -17,13 +17,12 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       z.string().transform((val) => parseFloat(parseFloat(val).toFixed(2))),
       z.number().transform((val) => parseFloat(val.toFixed(2))),
     ]),
-    tipo: z.enum(['entrada', 'saida']),
     categoria: z.number().nullable().optional(),
     conta: z.string().optional(),
     conciliado: z.boolean().optional(),
   })
 
-  const { nome, categoria, date, tipo, valor, conta, conciliado } =
+  const { nome, categoria, date, valor, conta, conciliado } =
     createBodySchema.parse(request.body)
 
   try {
@@ -32,7 +31,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       nome,
       date,
       valor,
-      tipo,
       user_id: userId,
       categoria,
       conta: conta ?? 'manual',
