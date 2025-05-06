@@ -11,8 +11,9 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
   const updateBodySchema = z.object({
     name: z.string().min(3).optional(),
     email: z.string().email().optional(),
-    avatar_url: z.string().url().optional(),
-    phone: z.string().optional(),
+    avatar_url: z.string().nullable().optional(),
+    phone: z.string().nullable().optional(),
+    password: z.string().optional(),
   })
 
   try {
@@ -20,7 +21,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
     const userId = request.user.sub
 
     // Valida os dados do corpo da requisição
-    const { name, email, avatar_url, phone } = updateBodySchema.parse(
+    const { name, email, avatar_url, phone, password } = updateBodySchema.parse(
       request.body,
     )
 
@@ -42,6 +43,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
       email,
       avatar_url,
       phone,
+      password,
     })
 
     // Retorna o usuário atualizado, removendo o campo password_hash
