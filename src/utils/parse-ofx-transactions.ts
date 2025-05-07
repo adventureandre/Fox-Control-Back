@@ -7,13 +7,14 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
   const conta =
     parsedOfx.OFX.BANKMSGSRSV1.STMTTRNRS.STMTRS.BANKACCTFROM.ACCTID ||
     'desconhecida'
+  const banco = parsedOfx.OFX.SIGNONMSGSRSV1.SONRS.FI.ORG
 
   return transacoes.map((item: any) => {
     // Obter o valor numérico da transação
     const valorOriginal = parseFloat(item.TRNAMT)
 
     // Determinar o tipo baseado no sinal do valor
-    const tipo = valorOriginal >= 0 ? 'entrada' : 'saida'
+    const tipo = valorOriginal >= 0 ? 'receita' : 'despesa'
 
     // Sempre armazenar o valor absoluto (positivo)
     const valorPositivo = Math.abs(valorOriginal)
@@ -24,6 +25,7 @@ export function extractTransactionsFormOFX(parsedOfx: any) {
       valor: valorPositivo,
       tipo,
       conta,
+      banco,
       categoria: null,
       conciliado: true,
     }

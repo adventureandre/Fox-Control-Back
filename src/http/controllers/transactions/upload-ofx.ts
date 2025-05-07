@@ -61,6 +61,8 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
           nome: transaction.nome,
           valor: transaction.valor,
           conta: transaction.conta,
+          tipo: transaction.tipo,
+          banco: transaction.banco,
           categoria: transaction.categoria,
           conciliado: transaction.conciliado,
           date: dateValue instanceof Date ? dateValue : dateValue,

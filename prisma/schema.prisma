@@ -35,6 +35,8 @@ model Transaction {
   valor      Float
   confirmed  Boolean  @default(false)
   conta      String
+  banco      String?
+  tipo       String?
   categoria  Int?
   imported   Boolean  @default(false)
   conciliado Boolean  @default(false)

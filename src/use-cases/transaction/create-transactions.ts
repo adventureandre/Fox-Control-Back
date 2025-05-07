@@ -8,6 +8,8 @@ interface CreateTransactionsUseCaseRequest {
   categoria?: number | null
   conciliado?: boolean
   conta: string
+  tipo?: string | null
+  banco?: string | null
   user_id: string
   imported?: boolean
 }
@@ -26,6 +28,8 @@ export class CreateTransactionsUseCase {
     valor,
     categoria,
     conciliado,
+    tipo,
+    banco,
     user_id,
     imported,
   }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
@@ -34,6 +38,8 @@ export class CreateTransactionsUseCase {
       conta,
       date,
       nome,
+      banco,
+      tipo,
       valor,
       user_id,
       categoria: categoria ?? null,
