@@ -60,11 +60,10 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
         return createTransactionsUseCase.execute({
           nome: transaction.nome,
           valor: transaction.valor,
-          tipo: transaction.tipo,
           conta: transaction.conta,
           categoria: transaction.categoria,
           conciliado: transaction.conciliado,
-          date: dateValue instanceof Date ? dateValue.toISOString() : dateValue,
+          date: dateValue instanceof Date ? dateValue : dateValue,
           user_id: userId,
         })
       }),
