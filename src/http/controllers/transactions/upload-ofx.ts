@@ -57,6 +57,11 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
           }
         }
 
+        // Validação da data
+        if (!(dateValue instanceof Date) || isNaN(dateValue.getTime())) {
+          throw new Error(`Data inválida encontrada: ${transaction.date}`)
+        }
+
         return createTransactionsUseCase.execute({
           nome: transaction.nome,
           valor: transaction.valor,
@@ -65,7 +70,7 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
           banco: transaction.banco,
           categoria: transaction.categoria,
           conciliado: transaction.conciliado,
-          date: dateValue instanceof Date ? dateValue : dateValue,
+          date: dateValue,
           user_id: userId,
         })
       }),

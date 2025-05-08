@@ -8,10 +8,15 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createBodySchema = z.object({
     nome: z.string(),
     date: z.string().transform((val) => {
-      if (val.includes('T')) {
-        return new Date(val)
+      const parsedDate = new Date(
+        val.includes('T') ? val : `${val}T00:00:00.000Z`,
+      )
+      if (isNaN(parsedDate.getTime())) {
+        throw new Error(
+          'O campo `date` é inválido. Certifique-se de que é uma data válida.',
+        )
       }
-      return new Date(`${val}T00:00:00.000Z`)
+      return parsedDate
     }),
     valor: z.union([
       z.string().transform((val) => parseFloat(parseFloat(val).toFixed(2))),
