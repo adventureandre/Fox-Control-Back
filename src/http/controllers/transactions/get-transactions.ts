@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { makeGetTransactionsUseCase } from '@/use-cases/factories/transaction/make-get-transactions-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -13,13 +13,12 @@ export async function getTransactions(
 
   const { page, limit } = paginationSchema.parse(request.query)
 
-  const transactions = await prisma.transaction.findMany({
-    skip: page && limit ? (page - 1) * limit : undefined,
-    take: limit || undefined,
-    orderBy: {
-      date: 'desc',
-    },
-  })
-
-  return reply.status(200).send(transactions)
+  try {
+    const getTransactionsUseCase = makeGetTransactionsUseCase()
+    const transactions = await getTransactionsUseCase.execute({ page, limit })
+    return reply.status(200).send(transactions)
+  } catch (error) {
+    console.error('Erro inesperado ao buscar transações:', error)
+    return reply.status(500).send({ error: 'Erro interno do servidor' })
+  }
 }

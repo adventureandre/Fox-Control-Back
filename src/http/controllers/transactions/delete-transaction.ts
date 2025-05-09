@@ -14,7 +14,7 @@ export async function deleteTransaction(
     const deleteTransactionsUseCase = makeDeleteTransactionUseCase()
     await deleteTransactionsUseCase.execute({ id, userId })
 
-    return reply.status(204).send() // No Content
+    return reply.status(204).send()
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
       return reply.status(404).send({ error: 'Transação não encontrada' })

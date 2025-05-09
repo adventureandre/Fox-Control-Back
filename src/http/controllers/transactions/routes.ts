@@ -5,7 +5,7 @@ import { uploadOfx } from './upload-ofx'
 import { getTransactions } from './get-transactions'
 import { verifyJwt } from '@/http/middlewares/verify-jwt'
 import { updateTransaction } from './update-transaction'
-import { deleteTransaction } from './delete'
+import { deleteTransaction } from './delete-transaction'
 
 export async function transacoesRoutes(app: FastifyInstance) {
   // Verifica se o usuário está autenticado para todas rotas
