@@ -25,9 +25,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     categoria: z.number().nullable().optional(),
     conta: z.string().optional(),
     conciliado: z.boolean().optional(),
+    confirmed: z.boolean().optional(),
+    banco: z.string().optional(),
   })
 
-  const { nome, categoria, date, valor, conta, conciliado } =
+  const { nome, categoria, date, valor, conta, conciliado, confirmed, banco } =
     createBodySchema.parse(request.body)
 
   try {
@@ -38,8 +40,10 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       valor,
       user_id: userId,
       categoria,
+      banco,
       conta: conta ?? 'manual',
       conciliado: !!conciliado,
+      confirmed: !!confirmed,
     })
 
     return reply.status(201).send(transaction)

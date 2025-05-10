@@ -12,6 +12,7 @@ interface CreateTransactionsUseCaseRequest {
   banco?: string | null
   user_id: string
   imported?: boolean
+  confirmed?: boolean
 }
 
 interface CreateTransactionsUseCaseResponse {
@@ -32,6 +33,7 @@ export class CreateTransactionsUseCase {
     banco,
     user_id,
     imported,
+    confirmed,
   }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
     const transaction = await this.transactionsRepository.create({
       imported,
@@ -42,6 +44,7 @@ export class CreateTransactionsUseCase {
       tipo,
       valor,
       user_id,
+      confirmed,
       categoria: categoria ?? null,
       conciliado: conciliado ?? false,
     })
