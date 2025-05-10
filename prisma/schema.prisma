@@ -28,6 +28,24 @@ model User {
   @@map("users")
 }
 
+model Producers {
+  id          String        @id @default(cuid())
+  name        String
+  cpf         String
+  BankAccount BankAccount[]
+
+  @@map("producers")
+}
+
+model BankAccount {
+  id    String @id @default(cuid())
+  conta String
+  banco String
+  productor   Producers @relation(fields: [producers_id], references: [id])
+  producers_id String
+  @@map("bank_accounts")
+}
+
 model Transaction {
   id         String   @id @default(cuid())
   date       DateTime
@@ -48,15 +66,14 @@ model Transaction {
   @@map("transactions")
 }
 
-
 model Category {
-  code        Int          @id @unique
+  code        Int        @id @unique
   level       Int
   description String
   type        String?
   parent_id   Int?
-  parent      Category?    @relation("CategoryToSubcategories", fields: [parent_id], references: [code])
-  children    Category[]   @relation("CategoryToSubcategories")
+  parent      Category?  @relation("CategoryToSubcategories", fields: [parent_id], references: [code])
+  children    Category[] @relation("CategoryToSubcategories")
 
   @@map("categories")
 }
