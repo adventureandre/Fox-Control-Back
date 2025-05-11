@@ -1,15 +1,19 @@
 import fastify from 'fastify'
-import { usersRoutes } from '@/http/controllers/users/routes'
-import { ZodError } from 'zod'
-import { env } from '@/env'
+
 import fastifyJwt from '@fastify/jwt'
 import fastifyCookie from '@fastify/cookie'
-import { transacoesRoutes } from './http/controllers/transactions/routes'
 import fastifyMultipart from '@fastify/multipart'
 import fastifyCors from '@fastify/cors'
 import fastifyStatic from '@fastify/static'
+
+import { ZodError } from 'zod'
+import { env } from '@/env'
 import path from 'node:path'
+
+import { usersRoutes } from '@/http/controllers/users/routes'
+import { transacoesRoutes } from './http/controllers/transactions/routes'
 import { categoriesRoutes } from './http/controllers/categories/routes'
+import { producersRoutes } from './http/controllers/producers/routes'
 
 export const app = fastify()
 
@@ -20,7 +24,7 @@ app.register(fastifyJwt, {
     signed: false,
   },
   sign: {
-    expiresIn: '7d',
+    expiresIn: '30d',
   },
 })
 
@@ -28,6 +32,7 @@ app.register(fastifyCors, {
   origin: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
 })
+
 app.register(fastifyCookie)
 app.register(fastifyMultipart)
 
@@ -35,6 +40,7 @@ app.register(fastifyMultipart)
 app.register(usersRoutes)
 app.register(transacoesRoutes)
 app.register(categoriesRoutes)
+app.register(producersRoutes)
 
 // Pagina statica de uploads
 app.register(fastifyStatic, {
