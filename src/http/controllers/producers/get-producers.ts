@@ -7,8 +7,5 @@ export async function getProducers(
 ) {
   const producers = await prisma.producers.findMany()
 
-  return reply.status(200).send({
-    status: 'success',
-    data: producers,
-  })
+  return reply.status(200).send(producers)
 }
