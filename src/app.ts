@@ -14,6 +14,7 @@ import { usersRoutes } from '@/http/controllers/users/routes'
 import { transacoesRoutes } from './http/controllers/transactions/routes'
 import { categoriesRoutes } from './http/controllers/categories/routes'
 import { producersRoutes } from './http/controllers/producers/routes'
+import { accountRoutes } from './http/controllers/bank-account/routes'
 
 export const app = fastify()
 
@@ -41,6 +42,7 @@ app.register(usersRoutes)
 app.register(transacoesRoutes)
 app.register(categoriesRoutes)
 app.register(producersRoutes)
+app.register(accountRoutes)
 
 // Pagina statica de uploads
 app.register(fastifyStatic, {

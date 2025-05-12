@@ -41,8 +41,8 @@ model BankAccount {
   id    String @id @default(cuid())
   conta String
   banco String
-  productor   Producers @relation(fields: [producers_id], references: [id])
-  producers_id String
+  producer   Producers @relation(fields: [producer_id], references: [id])
+  producer_id String
   @@map("bank_accounts")
 }
 
