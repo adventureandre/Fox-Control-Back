@@ -7,16 +7,21 @@ export async function createBankAccount(
   reply: FastifyReply,
 ) {
   const schemaBankAccount = z.object({
+    name: z.string(),
+    description: z.string().optional(),
     conta: z.string(),
     banco: z.string(),
     producer_id: z.string(),
   })
 
-  const { conta, banco, producer_id } = schemaBankAccount.parse(request.body)
+  const { conta, description, name, banco, producer_id } =
+    schemaBankAccount.parse(request.body)
 
   try {
-    const bankAccount = await prisma.bankAccount.create({
+    const bankAccount = await prisma.producerAccount.create({
       data: {
+        name,
+        description,
         conta,
         banco,
         producer_id,

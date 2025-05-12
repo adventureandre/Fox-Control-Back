@@ -36,17 +36,17 @@ export class CreateTransactionsUseCase {
     confirmed,
   }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
     const transaction = await this.transactionsRepository.create({
-      imported,
       conta,
       date,
       nome,
-      banco,
-      tipo,
       valor,
-      user_id,
-      confirmed,
       categoria: categoria ?? null,
       conciliado: conciliado ?? false,
+      tipo,
+      banco,
+      user_id,
+      imported,
+      confirmed,
     })
 
     return {
