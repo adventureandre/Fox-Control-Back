@@ -35,6 +35,11 @@ export class CreateTransactionsUseCase {
     imported,
     confirmed,
   }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
+    // Validação adicional, se necessário
+    if (!conta || !banco) {
+      throw new Error('Os campos conta e banco são obrigatórios.')
+    }
+
     const transaction = await this.transactionsRepository.create({
       conta,
       date,

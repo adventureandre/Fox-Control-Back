@@ -28,7 +28,10 @@ export async function createBankAccount(
       },
     })
 
-    return reply.status(201).send(bankAccount)
+    return reply.status(201).send({
+      status: 'success',
+      data: bankAccount,
+    })
   } catch (error) {
     console.error('Erro ao criar conta bancária:', error)
     return reply.status(500).send({

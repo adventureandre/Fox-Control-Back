@@ -23,13 +23,13 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       z.number().transform((val) => parseFloat(val.toFixed(2))),
     ]),
     categoria: z.number().nullable().optional(),
-    conta: z.string().optional(),
+    conta: z.string(),
+    banco: z.string(),
     conciliado: z.boolean().optional(),
     confirmed: z.boolean().optional(),
-    banco: z.string().optional(),
   })
 
-  const { nome, categoria, date, valor, conta, conciliado, confirmed, banco } =
+  const { nome, date, valor, categoria, conta, banco, conciliado, confirmed } =
     createBodySchema.parse(request.body)
 
   try {
@@ -41,7 +41,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       user_id: userId,
       categoria,
       banco,
-      conta: conta ?? 'manual',
+      conta,
       conciliado: !!conciliado,
       confirmed: !!confirmed,
     })
@@ -49,6 +49,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     return reply.status(201).send(transaction)
   } catch (error) {
     console.error('Erro ao criar transação:', error)
-    return reply.status(500).send({ error: 'Internal Server Error' })
+    return reply.status(500).send({ error: 'Erro interno do servidor' })
   }
 }

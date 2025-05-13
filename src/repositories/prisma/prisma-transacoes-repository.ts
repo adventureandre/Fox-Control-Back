@@ -24,7 +24,7 @@ export class PrismaTransacoesRepository implements TransactionRepository {
     return transactions
   }
 
-  async create(data: Prisma.TransactionCreateInput) {
+  async create(data: Prisma.TransactionCreateManyInput) {
     const transacao = await prisma.transaction.create({ data })
     return transacao
   }
