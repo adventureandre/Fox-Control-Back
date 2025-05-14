@@ -18,13 +18,30 @@ export async function createBankAccount(
     schemaBankAccount.parse(request.body)
 
   try {
+    const producerExists = await prisma.producers.findUnique({
+      where: {
+        id: producer_id,
+      },
+    })
+
+    if (!producerExists) {
+      return reply.status(404).send({
+        status: 'error',
+        message: 'Produtor não encontrado.',
+      })
+    }
+
     const bankAccount = await prisma.producerAccount.create({
       data: {
         name,
         description,
         conta,
         banco,
-        producer_id,
+        producer: {
+          connect: {
+            id: producer_id,
+          },
+        },
       },
     })
 

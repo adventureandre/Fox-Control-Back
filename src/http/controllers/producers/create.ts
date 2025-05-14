@@ -8,7 +8,7 @@ export async function createProducer(
 ) {
   const schemaProducer = z.object({
     name: z.string(),
-    cpf: z.string().regex(/^\d{11}$/, 'CPF deve conter 11 dígitos numéricos'),
+    cpf: z.string(),
   })
 
   try {

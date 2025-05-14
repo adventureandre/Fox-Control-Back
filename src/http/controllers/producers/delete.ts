@@ -9,6 +9,20 @@ export async function deleteProducer(
   const { id } = z.object({ id: z.string() }).parse(request.params)
 
   try {
+    const producerAccountExists = await prisma.producerAccount.findFirst({
+      where: {
+        producer_id: id,
+      },
+    })
+
+    if (producerAccountExists) {
+      return reply.status(400).send({
+        status: 'error',
+        message:
+          'Não é possível deletar o produtor, pois ele possui contas bancárias associadas.',
+      })
+    }
+
     const producer = await prisma.producers.delete({
       where: { id },
     })

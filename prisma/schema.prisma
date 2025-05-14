@@ -36,6 +36,8 @@ model Producers {
   BankAccount ProducerAccount[]
   created_at  DateTime          @default(now())
   updated_at  DateTime          @updatedAt
+  
+  Transaction Transaction[]
 
   @@map("producers")
 }
@@ -48,31 +50,34 @@ model ProducerAccount {
   conta       String
   balance     Float     @default(0)
   active      Boolean   @default(true)
-  producer    Producers @relation(fields: [producer_id], references: [id])
   producer_id String
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
+
+  producer    Producers @relation(fields: [producer_id], references: [id])
 
   @@map("producer_account")
 }
 
 model Transaction {
-  id         String   @id @default(cuid())
-  date       DateTime
-  nome       String
-  valor      Float
-  confirmed  Boolean  @default(false)
-  conta      String
-  banco      String?
-  tipo       String?
-  categoria  Int?
-  imported   Boolean  @default(false)
-  conciliado Boolean  @default(false)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id           String   @id @default(cuid())
+  date         DateTime
+  nome         String
+  valor        Float
+  confirmed    Boolean  @default(false)
+  conta        String
+  banco        String?
+  tipo         String?
+  categoria    Int?
+  imported     Boolean  @default(false)
+  conciliado   Boolean  @default(false)
+  user_id      String
+  producers_id String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id String
+  producer_id Producers? @relation(fields: [producers_id], references: [id])
+  user        User       @relation(fields: [user_id], references: [id])
 
   @@map("transactions")
 }

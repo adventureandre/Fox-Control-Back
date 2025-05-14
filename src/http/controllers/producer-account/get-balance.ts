@@ -20,6 +20,7 @@ export async function getBalance(request: FastifyRequest, reply: FastifyReply) {
     const transactionsbyAccount = await prisma.transaction.findMany({
       where: {
         conta: account.conta,
+        confirmed: true,
       },
     })
 
