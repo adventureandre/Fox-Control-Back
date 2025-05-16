@@ -13,6 +13,7 @@ interface CreateTransactionsUseCaseRequest {
   user_id: string
   imported?: boolean
   confirmed?: boolean
+  producer_id?: string
 }
 
 interface CreateTransactionsUseCaseResponse {
@@ -33,6 +34,7 @@ export class CreateTransactionsUseCase {
     banco,
     user_id,
     imported,
+    producer_id,
     confirmed,
   }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
     // Validação adicional, se necessário
@@ -51,6 +53,7 @@ export class CreateTransactionsUseCase {
       banco,
       user_id,
       imported,
+      producer_id,
       confirmed,
     })
 

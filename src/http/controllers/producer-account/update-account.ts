@@ -17,6 +17,7 @@ export async function updateAccount(
     balance: z.number().optional(),
     banco: z.string().optional(),
     active: z.boolean().optional(),
+    producer_id: z.string().optional(),
   })
 
   const { id } = paramsSchema.parse(request.params)

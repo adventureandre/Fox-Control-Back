@@ -27,10 +27,20 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     banco: z.string(),
     conciliado: z.boolean().optional(),
     confirmed: z.boolean().optional(),
+    producer_id: z.string().optional(),
   })
 
-  const { nome, date, valor, categoria, conta, banco, conciliado, confirmed } =
-    createBodySchema.parse(request.body)
+  const {
+    nome,
+    date,
+    valor,
+    categoria,
+    conta,
+    banco,
+    conciliado,
+    confirmed,
+    producer_id,
+  } = createBodySchema.parse(request.body)
 
   try {
     const createTransactionsUseCase = makeCreateTransactionsUseCase()
@@ -42,6 +52,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       categoria,
       banco,
       conta,
+      producer_id,
       conciliado: !!conciliado,
       confirmed: !!confirmed,
     })

@@ -72,11 +72,11 @@ model Transaction {
   imported     Boolean  @default(false)
   conciliado   Boolean  @default(false)
   user_id      String
-  producers_id String?
+  producer_id  String?
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
 
-  producer_id Producers? @relation(fields: [producers_id], references: [id])
+  producer Producers? @relation(fields: [producer_id], references: [id])
   user        User       @relation(fields: [user_id], references: [id])
 
   @@map("transactions")

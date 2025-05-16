@@ -24,6 +24,7 @@ export async function updateTransaction(
     conta: z.string().optional(),
     confirmed: z.boolean().optional(),
     imported: z.boolean().optional(),
+    producer_id: z.string().optional(),
   })
 
   const {
@@ -35,6 +36,7 @@ export async function updateTransaction(
     conta,
     confirmed,
     imported,
+    producer_id,
   } = updateTransactionSchema.parse(request.body)
 
   const { id } = request.params as { id: string }
@@ -51,6 +53,7 @@ export async function updateTransaction(
       conta,
       confirmed,
       imported,
+      producer_id,
     })
 
     return reply.status(200).send(transaction)
