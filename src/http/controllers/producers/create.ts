@@ -16,6 +16,20 @@ export async function createProducer(
 
     console.log('Criando produtor:', request.body)
 
+    // Verifica se já existe um produtor com este CPF
+    const existingProducer = await prisma.producers.findUnique({
+      where: {
+        cpf,
+      },
+    })
+
+    if (existingProducer) {
+      return reply.status(409).send({
+        status: 'error',
+        message: 'Já existe um produtor cadastrado com este CPF.',
+      })
+    }
+
     const producer = await prisma.producers.create({
       data: {
         name,
