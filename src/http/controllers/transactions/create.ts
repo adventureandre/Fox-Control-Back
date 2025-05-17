@@ -12,9 +12,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
         val.includes('T') ? val : `${val}T00:00:00.000Z`,
       )
       if (isNaN(parsedDate.getTime())) {
-        throw new Error(
-          'O campo `date` é inválido. Certifique-se de que é uma data válida.',
-        )
+        reply.status(400).send({
+          status: 'error',
+          message:
+            'O campo `date` é inválido. Certifique-se de que é uma data válida.',
+        })
       }
       return parsedDate
     }),

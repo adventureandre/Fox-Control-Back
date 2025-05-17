@@ -1,5 +1,7 @@
 import { TransactionRepository } from '@/repositories/transaction-repository'
+import { UsersRepository } from '@/repositories/users-repository'
 import { Transaction } from '@prisma/client'
+import { InvalidParameterError } from '../errors/invalid-parameter-error'
 
 interface CreateTransactionsUseCaseRequest {
   nome: string
@@ -21,7 +23,10 @@ interface CreateTransactionsUseCaseResponse {
 }
 
 export class CreateTransactionsUseCase {
-  constructor(private transactionsRepository: TransactionRepository) {}
+  constructor(
+    private transactionsRepository: TransactionRepository,
+    private userRepository: UsersRepository,
+  ) {}
 
   async execute({
     conta,
@@ -38,8 +43,16 @@ export class CreateTransactionsUseCase {
     confirmed,
   }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
     // Validação adicional, se necessário
+
+    const userExists = await this.userRepository.findById(user_id)
+    if (!userExists) {
+      throw new Error('Usuário não encontrado.')
+    }
+
     if (!conta || !banco) {
-      throw new Error('Os campos conta e banco são obrigatórios.')
+      throw new InvalidParameterError(
+        'Os campos conta e banco são obrigatórios.',
+      )
     }
 
     const transaction = await this.transactionsRepository.create({
