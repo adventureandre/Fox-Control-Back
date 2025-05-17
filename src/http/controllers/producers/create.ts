@@ -1,4 +1,6 @@
-import { prisma } from '@/lib/prisma'
+import { makeCreateProducerUseCase } from '@/use-cases/factories/producer/make-create-producer-use-case'
+import { makeGetProducerByCpfUseCase } from '@/use-cases/factories/producer/make-get-producer-by-cpf-use-case'
+
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -14,32 +16,25 @@ export async function createProducer(
   try {
     const { name, cpf } = schemaProducer.parse(request.body)
 
-    console.log('Criando produtor:', request.body)
+    const getProducerByCpfUseCase = makeGetProducerByCpfUseCase()
+    const { producer } = await getProducerByCpfUseCase.execute({ cpf })
 
-    // Verifica se já existe um produtor com este CPF
-    const existingProducer = await prisma.producers.findUnique({
-      where: {
-        cpf,
-      },
-    })
-
-    if (existingProducer) {
+    if (producer) {
       return reply.status(409).send({
         status: 'error',
         message: 'Já existe um produtor cadastrado com este CPF.',
       })
     }
 
-    const producer = await prisma.producers.create({
-      data: {
-        name,
-        cpf,
-      },
+    const createProducerUseCase = makeCreateProducerUseCase()
+    const producerCreate = await createProducerUseCase.execute({
+      name,
+      cpf,
     })
 
     return reply.status(201).send({
       status: 'success',
-      data: producer,
+      data: producerCreate,
     })
   } catch (error) {
     console.error('Erro ao criar produtor:', error)
