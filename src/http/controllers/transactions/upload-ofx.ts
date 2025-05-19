@@ -70,6 +70,8 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
           banco: transaction.banco,
           categoria: transaction.categoria,
           conciliado: transaction.conciliado,
+          imported: true,
+          confirmed: false,
           date: dateValue,
           user_id: userId,
         })
