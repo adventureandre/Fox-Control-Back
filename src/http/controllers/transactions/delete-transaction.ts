@@ -7,12 +7,20 @@ export async function deleteTransaction(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const { id } = request.params as { id: string }
   const userId = request.user.sub
+
+  const { ids } = request.body as { ids: string[] }
 
   try {
     const deleteTransactionsUseCase = makeDeleteTransactionUseCase()
-    await deleteTransactionsUseCase.execute({ id, userId })
+
+    if (ids && Array.isArray(ids)) {
+      for (const id of ids) {
+        await deleteTransactionsUseCase.execute({ id, userId })
+      }
+    } else {
+      return reply.status(400).send({ error: 'Nenhum ID válido fornecido' })
+    }
 
     return reply.status(204).send()
   } catch (error) {

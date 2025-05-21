@@ -13,7 +13,7 @@ export async function transacoesRoutes(app: FastifyInstance) {
 
   app.post('/transactions', create)
   app.put('/transactions/:id', updateTransaction)
-  app.delete('/transactions/:id', deleteTransaction)
+  app.delete('/transactions', deleteTransaction)
   app.get('/transactions', getTransactions)
   app.post('/transactions/upload', uploadOfx)
 }
