@@ -11,13 +11,23 @@ export async function createProducer(
   const schemaProducer = z.object({
     name: z.string(),
     cpf: z.string(),
+    group: z.string().optional(),
+    address: z.string().optional(),
+    city: z.string().optional(),
+    state: z.string().optional(),
+    phone: z.string().optional(),
+    email: z.string().optional(),
+    farm: z.string().optional(),
+    active: z.boolean().optional(),
   })
 
   try {
-    const { name, cpf } = schemaProducer.parse(request.body)
+    const data = schemaProducer.parse(request.body)
 
     const getProducerByCpfUseCase = makeGetProducerByCpfUseCase()
-    const { producer } = await getProducerByCpfUseCase.execute({ cpf })
+    const { producer } = await getProducerByCpfUseCase.execute({
+      cpf: data.cpf,
+    })
 
     if (producer) {
       return reply.status(409).send({
@@ -27,10 +37,7 @@ export async function createProducer(
     }
 
     const createProducerUseCase = makeCreateProducerUseCase()
-    const producerCreate = await createProducerUseCase.execute({
-      name,
-      cpf,
-    })
+    const producerCreate = await createProducerUseCase.execute(data)
 
     return reply.status(201).send({
       status: 'success',
