@@ -33,51 +33,59 @@ model Producers {
   id          String            @id @default(cuid())
   name        String
   cpf         String            @unique
+  phone       String?
+  group       String?
+  farm        String?
+  email       String?
+  address     String?
+  city        String?
+  state       String?
+  active      Boolean           @default(true)
   BankAccount ProducerAccount[]
   created_at  DateTime          @default(now())
   updated_at  DateTime          @updatedAt
-  
+
   Transaction Transaction[]
 
   @@map("producers")
 }
 
 model ProducerAccount {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   description String?
   banco       String
   conta       String
-  balance     Float     @default(0)
-  active      Boolean   @default(true)
+  balance     Float    @default(0)
+  active      Boolean  @default(true)
   producer_id String
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @updatedAt
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
-  producer    Producers @relation(fields: [producer_id], references: [id])
+  producer Producers @relation(fields: [producer_id], references: [id])
 
   @@map("producer_account")
 }
 
 model Transaction {
-  id           String   @id @default(cuid())
-  date         DateTime
-  nome         String
-  valor        Float
-  confirmed    Boolean  @default(false)
-  conta        String
-  banco        String?
-  tipo         String?
-  categoria    Int?
-  imported     Boolean  @default(false)
-  conciliado   Boolean  @default(false)
-  user_id      String
-  producer_id  String?
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  id          String   @id @default(cuid())
+  date        DateTime
+  nome        String
+  valor       Float
+  confirmed   Boolean  @default(false)
+  conta       String
+  banco       String?
+  tipo        String?
+  categoria   Int?
+  imported    Boolean  @default(false)
+  conciliado  Boolean  @default(false)
+  user_id     String
+  producer_id String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   producer Producers? @relation(fields: [producer_id], references: [id])
-  user        User       @relation(fields: [user_id], references: [id])
+  user     User       @relation(fields: [user_id], references: [id])
 
   @@map("transactions")
 }
@@ -92,4 +100,38 @@ model Category {
   children    Category[] @relation("CategoryToSubcategories")
 
   @@map("categories")
+}
+
+model Cutomer {
+  id                String   @id @default(cuid())
+  name              String
+  cpf               String   @unique
+  phone             String?
+  email             String?
+  address           String?
+  stateRegistration String?
+  city              String?
+  state             String?
+  active            Boolean  @default(true)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  @@map("cutomers")
+}
+
+model Supplier {
+  id                String   @id @default(cuid())
+  name              String
+  cpf               String   @unique
+  phone             String?
+  email             String?
+  address           String?
+  stateRegistration String?
+  city              String?
+  state             String?
+  active            Boolean  @default(true)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  @@map("suppliers")
 }
