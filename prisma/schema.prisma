@@ -102,7 +102,7 @@ model Category {
   @@map("categories")
 }
 
-model Cutomer {
+model Customer {
   id                String   @id @default(cuid())
   name              String
   cpf               String   @unique
