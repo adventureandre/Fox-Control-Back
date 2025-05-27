@@ -2,9 +2,9 @@ import { verifyJwt } from '@/http/middlewares/verify-jwt'
 import { FastifyInstance } from 'fastify'
 import { getCustomers } from './get-customers'
 import { createCustomer } from './create'
-import { deleteCustomer } from '../customers/delete'
+import { deleteCustomer } from './delete'
 
-export async function customersRoutes(app: FastifyInstance) {
+export async function customerRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJwt)
 
   app.get('/customers', getCustomers)
