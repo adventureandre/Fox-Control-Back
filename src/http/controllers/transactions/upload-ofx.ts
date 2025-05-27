@@ -9,6 +9,7 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
 
   if (!ofxFile) {
     return reply.status(400).send({
+      status: 'error',
       message: 'Nenhum arquivo foi enviado.',
     })
   }
@@ -26,9 +27,10 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
     !allowedExtensions.includes(fileExt) ||
     !allowedMimeTypes.includes(ofxFile.mimetype)
   ) {
-    return reply
-      .status(400)
-      .send({ message: 'Arquivo inválido. Envie um arquivo .ofx válido.' })
+    return reply.status(400).send({
+      status: 'error',
+      message: 'Arquivo inválido. Envie um arquivo .ofx válido.',
+    })
   }
 
   const fileBuffer = await ofxFile.toBuffer()
@@ -79,13 +81,15 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
     )
 
     return reply.status(201).send({
+      status: 'success',
       message: 'Arquivo processado com sucesso',
       count: transactions.length,
     })
   } catch (error) {
     console.error('Erro ao processar o arquivo OFX:', error)
-    return reply
-      .status(500)
-      .send({ message: 'Erro ao processar o arquivo OFX' })
+    return reply.status(500).send({
+      status: 'error',
+      message: 'Erro ao processar o arquivo OFX',
+    })
   }
 }

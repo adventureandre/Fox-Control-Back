@@ -19,17 +19,26 @@ export async function deleteTransaction(
         await deleteTransactionsUseCase.execute({ id, userId })
       }
     } else {
-      return reply.status(400).send({ error: 'Nenhum ID válido fornecido' })
+      return reply.status(400).send({
+        status: 'error',
+        message: 'Nenhum ID válido fornecido',
+      })
     }
 
     return reply.status(204).send()
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
-      return reply.status(404).send({ error: 'Transação não encontrada' })
+      return reply.status(404).send({
+        status: 'error',
+        message: 'Transação não encontrada',
+      })
     }
 
     if (error instanceof UnauthorizedError) {
-      return reply.status(403).send({ error: 'Acesso não autorizado' })
+      return reply.status(403).send({
+        status: 'error',
+        message: 'Acesso não autorizado',
+      })
     }
 
     console.error('Erro inesperado ao deletar transação:', error)

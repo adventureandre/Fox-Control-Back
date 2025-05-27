@@ -30,6 +30,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
     // Verifica se pelo menos um campo foi fornecido
     if (!name && !email && !avatar_url) {
       return reply.status(400).send({
+        status: 'error',
         message: 'Pelo menos um campo deve ser fornecido para atualização.',
       })
     }
@@ -59,11 +60,15 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
   } catch (error) {
     // Tratamento de erros específicos
     if (error instanceof ResourceNotFoundError) {
-      return reply.status(404).send({ message: 'Usuário não encontrado.' })
+      return reply.status(404).send({
+        status: 'error',
+        message: 'Usuário não encontrado.',
+      })
     }
 
     if (error instanceof z.ZodError) {
       return reply.status(400).send({
+        status: 'error',
         message: 'Dados de entrada inválidos.',
         issues: error.format(),
       })
@@ -74,11 +79,17 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
       error instanceof Error &&
       error.message === 'E-mail já está sendo utilizado.'
     ) {
-      return reply.status(400).send({ message: error.message })
+      return reply.status(400).send({
+        status: 'error',
+        message: error.message,
+      })
     }
 
     // Qualquer outro erro
     console.error(error)
-    return reply.status(500).send({ message: 'Erro interno do servidor.' })
+    return reply.status(500).send({
+      status: 'error',
+      message: 'Erro interno do servidor.',
+    })
   }
 }
