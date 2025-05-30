@@ -14,11 +14,9 @@ export async function getAccountByProducer(
   const { producer_id } = paramsSchema.parse(request.params)
 
   try {
-    const account = await prisma.producerAccount.findUnique({
+    const account = await prisma.producerAccount.findMany({
       where: { producer_id },
     })
-
-    console.log('Request params:', account)
 
     if (!account) {
       return reply.status(404).send({
