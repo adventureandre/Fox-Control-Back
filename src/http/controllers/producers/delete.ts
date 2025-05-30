@@ -16,7 +16,7 @@ export async function deleteProducer(
     })
 
     if (producerAccountExists) {
-      return reply.status(400).send({
+      return reply.status(409).send({
         status: 'error',
         message:
           'Não é possível deletar o produtor, pois ele possui contas bancárias associadas.',
