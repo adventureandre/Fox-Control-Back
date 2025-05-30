@@ -6,4 +6,8 @@ export interface ProducerRepository {
   findByCpf(cpf: string): Promise<Producers | null>
   delete(id: string): Promise<void>
   getProducers(): Promise<Producers[] | []>
+  update(params: {
+    id: string
+    data: Prisma.ProducersUpdateInput
+  }): Promise<Producers>
 }

@@ -22,4 +22,17 @@ export class PrismaProducersRepository implements ProducerRepository {
   async getProducers() {
     return await prisma.producers.findMany()
   }
+
+  async update({
+    id,
+    data,
+  }: {
+    id: string
+    data: Prisma.ProducersUpdateInput
+  }) {
+    return await prisma.producers.update({
+      where: { id },
+      data,
+    })
+  }
 }

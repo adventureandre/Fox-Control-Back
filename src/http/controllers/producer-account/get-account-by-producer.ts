@@ -9,7 +9,6 @@ export async function getAccountByProducer(
   const paramsSchema = z.object({
     producer_id: z.string(),
   })
-  console.log('Request params:', request.params)
 
   const { producer_id } = paramsSchema.parse(request.params)
 
