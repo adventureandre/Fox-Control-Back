@@ -41,13 +41,31 @@ model Producers {
   city        String?
   state       String?
   active      Boolean           @default(true)
-  BankAccount ProducerAccount[]
   created_at  DateTime          @default(now())
   updated_at  DateTime          @updatedAt
 
+  BankAccount ProducerAccount[]
   Transaction Transaction[]
+  Farm        Farm[]
 
   @@map("producers")
+}
+
+model Farm {
+  id           String  @id @default(cuid())
+  name         String
+  city         String
+  hectares     Int
+  latitude     Decimal
+  longitude    Decimal
+  producer_id String
+  active       Boolean  @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  producer Producers @relation(fields: [producer_id], references: [id])
+
+  @@map("farms")
 }
 
 model ProducerAccount {
