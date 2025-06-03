@@ -5,6 +5,8 @@ import fastifyCookie from '@fastify/cookie'
 import fastifyMultipart from '@fastify/multipart'
 import fastifyCors from '@fastify/cors'
 import fastifyStatic from '@fastify/static'
+import fastifySwagger from '@fastify/swagger'
+import fastifySwaggerUi from '@fastify/swagger-ui'
 
 import { ZodError } from 'zod'
 import { env } from '@/env'
@@ -15,9 +17,9 @@ import { transacoesRoutes } from './http/controllers/transactions/routes'
 import { categoriesRoutes } from './http/controllers/categories/routes'
 import { producersRoutes } from './http/controllers/producers/routes'
 import { accountRoutes } from './http/controllers/producer-account/routes'
-import { customersRoutes } from './http/controllers/cutomers/routes'
 import { supplierRoutes } from './http/controllers/suppliers/routes'
 import { farmRoutes } from './http/controllers/farm/routes'
+import { customerRoutes } from './http/controllers/customers/routes'
 
 export const app = fastify()
 
@@ -30,6 +32,30 @@ app.register(fastifyJwt, {
   sign: {
     expiresIn: '30d',
   },
+})
+
+app.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: 'Desapega Vendas API',
+      description: 'Documentação da API do Dashboard Financeiro',
+      version: '1.0.0',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [{ bearerAuth: [] }],
+  },
+})
+
+app.register(fastifySwaggerUi, {
+  routePrefix: '/docs',
 })
 
 app.register(fastifyCors, {
@@ -46,7 +72,7 @@ app.register(transacoesRoutes)
 app.register(categoriesRoutes)
 app.register(producersRoutes)
 app.register(accountRoutes)
-app.register(customersRoutes)
+app.register(customerRoutes)
 app.register(supplierRoutes)
 app.register(farmRoutes)
 

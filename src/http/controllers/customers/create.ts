@@ -22,8 +22,6 @@ export async function createCustomer(
   try {
     const data = schemaCustomer.parse(request.body)
 
-    console.log('Dados do Clientes:', data)
-
     const getCustomerByCpfUseCase = makeGetCustomerByCpfUseCase()
     const { customer } = await getCustomerByCpfUseCase.execute({
       cpf: data.cpf,

@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 
 export async function seedCategories() {
   const categories = [
+    // Nível 1 - Entradas
     {
       code: 1,
       level: 1,
@@ -9,20 +10,26 @@ export async function seedCategories() {
       parent_id: null,
       type: 'receita',
     },
+
+    // Nível 3 - Receita
     {
       code: 101,
       level: 3,
-      description: 'ENTRADAS OPERACIONAIS',
+      description: 'RECEITA',
       parent_id: 1,
       type: 'receita',
     },
+
+    // Nível 4 - Receita Semente
     {
       code: 1011,
       level: 4,
-      description: 'VENDA DE SEMENTES',
+      description: 'RECEITA SEMENTE',
       parent_id: 101,
       type: 'receita',
     },
+
+    // Nível 6 - Sementes
     {
       code: 101101,
       level: 6,
@@ -58,13 +65,17 @@ export async function seedCategories() {
       parent_id: 1011,
       type: 'receita',
     },
+
+    // Nível 4 - Receita Grão
     {
       code: 1012,
       level: 4,
-      description: 'VENDA DE COMMODITIES',
+      description: 'RECEITA GRÃO',
       parent_id: 101,
       type: 'receita',
     },
+
+    // Nível 6 - Grãos
     {
       code: 101201,
       level: 6,
@@ -82,7 +93,7 @@ export async function seedCategories() {
     {
       code: 101207,
       level: 6,
-      description: 'FEIJAO',
+      description: 'FEIJÃO',
       parent_id: 1012,
       type: 'receita',
     },
@@ -100,57 +111,26 @@ export async function seedCategories() {
       parent_id: 1012,
       type: 'receita',
     },
-    {
-      code: 101293,
-      level: 6,
-      description: 'SENAR RETIDO',
-      parent_id: 1012,
-      type: 'receita',
-    },
-    {
-      code: 101294,
-      level: 6,
-      description: 'FUNRURAL RETIDO',
-      parent_id: 1012,
-      type: 'receita',
-    },
-    {
-      code: 101295,
-      level: 6,
-      description: 'FUNDEINFRA RETIDO',
-      parent_id: 1012,
-      type: 'receita',
-    },
-    {
-      code: 101299,
-      level: 6,
-      description: 'FETHAB RETIDO',
-      parent_id: 1012,
-      type: 'receita',
-    },
+
+    // Nível 4 - Prestação de Serviço
     {
       code: 1014,
       level: 4,
-      description: 'PRESTACAO DE SERVICO',
+      description: 'PRESTACAO DE SERVIÇO',
       parent_id: 101,
       type: 'receita',
     },
+
+    // Nível 6 - Serviços
     {
-      code: 101401,
-      level: 6,
-      description: 'BENEFICIAMENTO',
-      parent_id: 1014,
-      type: 'receita',
-    },
-    {
-      code: 101402,
+      code: 101691,
       level: 6,
       description: 'ARMAZENAGEM',
       parent_id: 1014,
       type: 'receita',
     },
     {
-      code: 101403,
+      code: 101692,
       level: 6,
       description: 'TRANSPORTE',
       parent_id: 1014,
@@ -159,17 +139,12 @@ export async function seedCategories() {
     {
       code: 101404,
       level: 6,
-      description: 'OUTROS SERVICOS',
+      description: 'OUTROS SERVIÇOS',
       parent_id: 1014,
       type: 'receita',
     },
-    {
-      code: 101405,
-      level: 6,
-      description: 'PRESTACAO DE SERVICO COM IR + ISS + PCC',
-      parent_id: 1014,
-      type: 'receita',
-    },
+
+    // Nível 4 - Outras Entradas Operacionais
     {
       code: 1016,
       level: 4,
@@ -177,24 +152,12 @@ export async function seedCategories() {
       parent_id: 101,
       type: 'receita',
     },
-    {
-      code: 101601,
-      level: 6,
-      description: 'VENDA DE SUCATA',
-      parent_id: 1016,
-      type: 'receita',
-    },
+
+    // Nível 6 - Outras Entradas
     {
       code: 101602,
       level: 6,
       description: 'VENDA DE IMOBILIZADO',
-      parent_id: 1016,
-      type: 'receita',
-    },
-    {
-      code: 101603,
-      level: 6,
-      description: 'SINISTRO IMOBILIZADO',
       parent_id: 1016,
       type: 'receita',
     },
@@ -213,37 +176,9 @@ export async function seedCategories() {
       type: 'receita',
     },
     {
-      code: 101606,
-      level: 6,
-      description: 'CLIENTE INTERCOMPANY',
-      parent_id: 1016,
-      type: 'receita',
-    },
-    {
       code: 101607,
       level: 6,
       description: 'ADIANTAMENTO INTERCOMPANY',
-      parent_id: 1016,
-      type: 'receita',
-    },
-    {
-      code: 101608,
-      level: 6,
-      description: 'VENDA DE RESIDUOS',
-      parent_id: 1016,
-      type: 'receita',
-    },
-    {
-      code: 101609,
-      level: 6,
-      description: 'EMPRESTIMO A RECEBER - PARTES RELACIONADAS',
-      parent_id: 1016,
-      type: 'receita',
-    },
-    {
-      code: 101612,
-      level: 6,
-      description: 'EMPRESTIMOS A RECEBER - PESSOAS LIGADAS',
       parent_id: 1016,
       type: 'receita',
     },
@@ -254,62 +189,42 @@ export async function seedCategories() {
       parent_id: 1016,
       type: 'receita',
     },
-    {
-      code: 102,
-      level: 3,
-      description: 'ENTRADAS FINANCEIRAS',
-      parent_id: 1,
-      type: 'receita',
-    },
+
+    // Nível 4 - Receita Financeira
     {
       code: 1021,
       level: 4,
       description: 'RECEITA FINANCEIRA',
-      parent_id: 102,
+      parent_id: 101,
       type: 'receita',
     },
+
+    // Nível 6 - Receitas Financeiras
     {
       code: 102101,
       level: 6,
-      description: 'RECEBIMENTO DE EMPRESTIMOS CON',
-      parent_id: 1021,
-      type: 'receita',
-    },
-    {
-      code: 102102,
-      level: 6,
-      description: 'JUROS E MULTAS RECEBIDOS DE CL',
+      description: 'RECEBIMENTO DE EMPRÉSTIMOS',
       parent_id: 1021,
       type: 'receita',
     },
     {
       code: 102103,
       level: 6,
-      description: 'APORTE, EMPRESTIMOS E RECURSOS',
+      description: 'APORTE, EMPRÉSTIMOS E RECURSOS',
       parent_id: 1021,
       type: 'receita',
     },
-    {
-      code: 102104,
-      level: 6,
-      description: 'INSTRUMENTOS FINANCEIROS ATIVO',
-      parent_id: 1021,
-      type: 'receita',
-    },
-    {
-      code: 102105,
-      level: 6,
-      description: 'VARIACAO CAMBIAL ATIVA',
-      parent_id: 1021,
-      type: 'receita',
-    },
+
+    // Nível 4 - Outras Entradas Financeiras
     {
       code: 1022,
       level: 4,
       description: 'OUTRAS ENTRADAS FINANCEIRAS',
-      parent_id: 102,
+      parent_id: 101,
       type: 'receita',
     },
+
+    // Nível 6 - Outras Entradas Financeiras
     {
       code: 102201,
       level: 6,
@@ -320,112 +235,46 @@ export async function seedCategories() {
     {
       code: 102202,
       level: 6,
-      description: 'ALUGEIS RECEBIDOS',
-      parent_id: 1022,
-      type: 'receita',
-    },
-    {
-      code: 102203,
-      level: 6,
-      description: 'DEPOSITOS JUDICIAIS',
+      description: 'ALUGUEIS RECEBIDOS',
       parent_id: 1022,
       type: 'receita',
     },
     {
       code: 102204,
       level: 6,
-      description: 'CREDITO CONSORCIO',
+      description: 'CREDITO CONSÓRCIO',
       parent_id: 1022,
       type: 'receita',
     },
-    {
-      code: 102205,
-      level: 6,
-      description: 'RESTITUICAO DE CREDITOS FEDERAIS',
-      parent_id: 1022,
-      type: 'receita',
-    },
-    {
-      code: 102206,
-      level: 6,
-      description: 'CREDITO SEGURO',
-      parent_id: 1022,
-      type: 'receita',
-    },
-    {
-      code: 102207,
-      level: 6,
-      description: 'DEVOLUCAO PESAGEM - NCC',
-      parent_id: 1022,
-      type: 'receita',
-    },
-    {
-      code: 102208,
-      level: 6,
-      description: 'SEGURO PRESTAMISTA S/ EMPR',
-      parent_id: 1022,
-      type: 'receita',
-    },
-    {
-      code: 102209,
-      level: 6,
-      description: 'RECEB ALUGUEIS VEICULOS ENTRE PARTES RELACIONADAS',
-      parent_id: 1022,
-      type: 'receita',
-    },
-    {
-      code: 109,
-      level: 3,
-      description: 'ENTRADA DE INVESTIMENTOS',
-      parent_id: 1,
-      type: 'receita',
-    },
+
+    // Nível 4 - Entrada de Investimentos
     {
       code: 1091,
       level: 4,
       description: 'ENTRADA DE INVESTIMENTOS',
-      parent_id: 109,
+      parent_id: 101,
       type: 'receita',
     },
+
+    // Nível 6 - Investimentos
     {
       code: 109101,
       level: 6,
-      description: 'RENDIMENTO S/APLICACOES',
+      description: 'RENDIMENTO S/APLICACÕES',
       parent_id: 1091,
       type: 'receita',
     },
     {
       code: 109102,
       level: 6,
-      description: 'RESGATE DE APLICACOES',
-      parent_id: 1091,
-      type: 'receita',
-    },
-    {
-      code: 109103,
-      level: 6,
-      description: 'VENDA DE ACOES/COTAS DE CAPITA',
-      parent_id: 1091,
-      type: 'receita',
-    },
-    {
-      code: 109104,
-      level: 6,
-      description: 'DIVIDENDOS RECEBIDOS',
-      parent_id: 1091,
-      type: 'receita',
-    },
-    {
-      code: 109105,
-      level: 6,
-      description: 'VENDA DE IMOBILIZADO',
+      description: 'RESGATE DE APLICAÇÕES',
       parent_id: 1091,
       type: 'receita',
     },
     {
       code: 109106,
       level: 6,
-      description: 'TITULOS DE CAPITALIZACAO',
+      description: 'TÍTULOS DE CAPITALIZAÇÃO',
       parent_id: 1091,
       type: 'receita',
     },
@@ -436,48 +285,51 @@ export async function seedCategories() {
       parent_id: 1091,
       type: 'receita',
     },
-    {
-      code: 110,
-      level: 3,
-      description: 'CONTRATOS BANCARIOS',
-      parent_id: 1,
-      type: 'receita',
-    },
+
+    // Nível 4 - Movimentações Bancárias
     {
       code: 1101,
       level: 4,
-      description: 'MOVIMENTACOES BANCARIAS',
-      parent_id: 110,
+      description: 'MOVIMENTAÇÕES BANCARIAS',
+      parent_id: 101,
       type: 'receita',
     },
+
+    // Nível 6 - Movimentações Bancárias
     {
       code: 110101,
       level: 6,
-      description: 'CAPTACAO DE EMPRESTIMOS',
+      description: 'CAPTAÇÃO DE EMPRÉSTIMOS',
       parent_id: 1101,
       type: 'receita',
     },
     {
       code: 110102,
       level: 6,
-      description: 'CAPTACAO DE FINANCIAMENTO',
+      description: 'CAPTAÇÃO DE FINANCIAMENTO',
       parent_id: 1101,
       type: 'receita',
     },
+
+    // Nível 1 - Saídas
     {
       code: 2,
       level: 1,
-      description: 'SAIDAS',
+      description: 'SAIDA',
       parent_id: null,
       type: 'despesa',
     },
+
+    // Nível 3 - Despesas
     {
       code: 201,
       level: 3,
-      description: 'SAIDAS OPERACIONAIS',
+      description: 'DESPESAS',
       parent_id: 2,
       type: 'despesa',
     },
+
+    // Nível 4 - Pessoas
     {
       code: 2011,
       level: 4,
@@ -485,17 +337,12 @@ export async function seedCategories() {
       parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Pessoas
     {
       code: 201101,
       level: 6,
       description: 'PRO-LABORE',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
-      code: 201102,
-      level: 6,
-      description: 'GASTOS C/SERVICOS PROFISSIONAIS',
       parent_id: 2011,
       type: 'despesa',
     },
@@ -528,16 +375,9 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 201107,
-      level: 6,
-      description: 'PENSAO ALIMENTICIA',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
       code: 201108,
       level: 6,
-      description: 'RESCISAO A PAGAR',
+      description: 'RESCISÃO A PAGAR',
       parent_id: 2011,
       type: 'despesa',
     },
@@ -563,13 +403,6 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 201112,
-      level: 6,
-      description: 'BENEFICIOS, TREINAMENTO',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
       code: 201113,
       level: 6,
       description: 'PLR A PAGAR',
@@ -580,20 +413,6 @@ export async function seedCategories() {
       code: 201114,
       level: 6,
       description: 'INDENIZACAO PROCESSOS TRABALHISTAS',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
-      code: 201115,
-      level: 6,
-      description: 'INSS S/  FOLHA A RECOLHER',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
-      code: 201116,
-      level: 6,
-      description: 'IRRF S/ FOLHA A RECOLHER',
       parent_id: 2011,
       type: 'despesa',
     },
@@ -612,13 +431,6 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 201119,
-      level: 6,
-      description: 'SALARIO EDUCACAO (DEP JUDICIAL)',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
       code: 201120,
       level: 6,
       description: 'GRATIFICACOES',
@@ -629,13 +441,6 @@ export async function seedCategories() {
       code: 201121,
       level: 6,
       description: 'DIARIAS',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
-      code: 201122,
-      level: 6,
-      description: 'ADIANTAMENTO DE VIAGEM',
       parent_id: 2011,
       type: 'despesa',
     },
@@ -654,26 +459,14 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 201125,
-      level: 6,
-      description: 'CONTRIBUICAO SINDICAL A RECOLHER',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
-      code: 201126,
-      level: 6,
-      description: 'DEPOSITO JUDICIAL TRABALHISTA',
-      parent_id: 2011,
-      type: 'despesa',
-    },
-    {
       code: 201127,
       level: 6,
       description: '13 PRO LABORE',
       parent_id: 2011,
       type: 'despesa',
     },
+
+    // Nível 4 - Fornecedores
     {
       code: 2012,
       level: 4,
@@ -681,6 +474,8 @@ export async function seedCategories() {
       parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Fornecedores
     {
       code: 201201,
       level: 6,
@@ -689,19 +484,56 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
+      code: 201202,
+      level: 6,
+      description: 'FORNECEDORES DE CALCÁRIO',
+      parent_id: 2012,
+      type: 'despesa',
+    },
+    {
+      code: 201203,
+      level: 6,
+      description: 'FORNECEDORES DE ADUBO',
+      parent_id: 2012,
+      type: 'despesa',
+    },
+    {
+      code: 201204,
+      level: 6,
+      description: 'FORNECEDORES DE SEMENTE',
+      parent_id: 2012,
+      type: 'despesa',
+    },
+    {
+      code: 201205,
+      level: 6,
+      description: 'FORNECEDORES DE QUIMICO',
+      parent_id: 2012,
+      type: 'despesa',
+    },
+    {
       code: 201206,
+      level: 6,
+      description: 'FORNECEDORES DE BIOLOGICO',
+      parent_id: 2012,
+      type: 'despesa',
+    },
+    {
+      code: 201207,
+      level: 6,
+      description: 'FORNECEDORES DE NUTRIÇÃO',
+      parent_id: 2012,
+      type: 'despesa',
+    },
+    {
+      code: 201208,
       level: 6,
       description: 'FORNECEDORES PJ DIVERSOS',
       parent_id: 2012,
       type: 'despesa',
     },
-    {
-      code: 201209,
-      level: 6,
-      description: 'FORNECEDOR INTERCOMPANY',
-      parent_id: 2012,
-      type: 'despesa',
-    },
+
+    // Nível 4 - Prestação de Serviços
     {
       code: 2013,
       level: 4,
@@ -709,6 +541,8 @@ export async function seedCategories() {
       parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Serviços
     {
       code: 201301,
       level: 6,
@@ -730,90 +564,8 @@ export async function seedCategories() {
       parent_id: 2013,
       type: 'despesa',
     },
-    {
-      code: 201304,
-      level: 6,
-      description: 'FRETE INTERNO P/ ARMAZENAGEM',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201305,
-      level: 6,
-      description: 'OUTROS SERVICOS SEM RETENCAO',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201306,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ IR',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201307,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ IR+PCC',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201308,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ IR+PCC+ISS',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201309,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ PCC+ISS',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201310,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ PCC',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201311,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ ISS',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201312,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ IR  E INSS',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201313,
-      level: 6,
-      description: 'OUTROS SERVICOS C/ INSS',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201314,
-      level: 6,
-      description: 'OUTROS SERVICOS COM PCC E INSS',
-      parent_id: 2013,
-      type: 'despesa',
-    },
-    {
-      code: 201315,
-      level: 6,
-      description: 'OUTROS SERVICOS COM INSS E ISS',
-      parent_id: 2013,
-      type: 'despesa',
-    },
+
+    // Nível 4 - Saídas Específicas
     {
       code: 2014,
       level: 4,
@@ -821,6 +573,8 @@ export async function seedCategories() {
       parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Saídas Específicas
     {
       code: 201404,
       level: 6,
@@ -828,6 +582,8 @@ export async function seedCategories() {
       parent_id: 2014,
       type: 'despesa',
     },
+
+    // Nível 4 - Saídas Administrativas/Comerciais
     {
       code: 2015,
       level: 4,
@@ -835,6 +591,8 @@ export async function seedCategories() {
       parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Saídas Administrativas
     {
       code: 201501,
       level: 6,
@@ -846,20 +604,6 @@ export async function seedCategories() {
       code: 201502,
       level: 6,
       description: 'FRETE S/ VENDA',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201503,
-      level: 6,
-      description: 'COMISSOES S/VENDA SEM IR',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201504,
-      level: 6,
-      description: 'MANUTENCOES',
       parent_id: 2015,
       type: 'despesa',
     },
@@ -885,13 +629,6 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 201508,
-      level: 6,
-      description: 'ALUGUEIS DE VEICULOS',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
       code: 201509,
       level: 6,
       description: 'SEGUROS',
@@ -902,20 +639,6 @@ export async function seedCategories() {
       code: 201510,
       level: 6,
       description: 'CONSULTORIAS',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201511,
-      level: 6,
-      description: 'VIAGENS',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201512,
-      level: 6,
-      description: 'CONTRIBUICOES E DOACOES',
       parent_id: 2015,
       type: 'despesa',
     },
@@ -948,20 +671,6 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 201517,
-      level: 6,
-      description: 'ADIANTAMENTO INTERCOMPANY',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201518,
-      level: 6,
-      description: 'DIVIDENDOS ANTECIPADOS',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
       code: 201519,
       level: 6,
       description: 'MULTAS DIVERSAS',
@@ -971,14 +680,7 @@ export async function seedCategories() {
     {
       code: 201520,
       level: 6,
-      description: 'CONTRIBUICOES ASSOCIATIVAS',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201521,
-      level: 6,
-      description: 'PERDAS ADIANTAMENTOS A RECEBER',
+      description: 'CONTRIBUICÕES ASSOCIATIVAS',
       parent_id: 2015,
       type: 'despesa',
     },
@@ -990,44 +692,9 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 201523,
-      level: 6,
-      description: 'BONIFICACOES',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
       code: 201524,
       level: 6,
       description: 'REGISTRO CARTORIOS',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201525,
-      level: 6,
-      description: 'DEPOSITO JUDICIAL CIVEL',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201526,
-      level: 6,
-      description: 'BLOQUEIO JUDICIAL BANCARIO',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201527,
-      level: 6,
-      description: 'COMISSOES S/ VENDAS COM IR',
-      parent_id: 2015,
-      type: 'despesa',
-    },
-    {
-      code: 201528,
-      level: 6,
-      description: 'BLOQUEIO BANCARIO S/ JUDICIAL',
       parent_id: 2015,
       type: 'despesa',
     },
@@ -1038,6 +705,8 @@ export async function seedCategories() {
       parent_id: 2015,
       type: 'despesa',
     },
+
+    // Nível 4 - Tributos e Taxas
     {
       code: 2016,
       level: 4,
@@ -1045,69 +714,8 @@ export async function seedCategories() {
       parent_id: 201,
       type: 'despesa',
     },
-    {
-      code: 201601,
-      level: 6,
-      description: 'ICMS',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201602,
-      level: 6,
-      description: 'CSLL RETENCAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201603,
-      level: 6,
-      description: 'PIS RETENCAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201604,
-      level: 6,
-      description: 'PIS APURACAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201605,
-      level: 6,
-      description: 'ISS RETENCAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201606,
-      level: 6,
-      description: 'ISS APURACAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201607,
-      level: 6,
-      description: 'COFINS RETENCAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201608,
-      level: 6,
-      description: 'COFINS APURACAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201609,
-      level: 6,
-      description: 'IRPJ',
-      parent_id: 2016,
-      type: 'despesa',
-    },
+
+    // Nível 6 - Tributos
     {
       code: 201610,
       level: 6,
@@ -1122,265 +730,35 @@ export async function seedCategories() {
       parent_id: 2016,
       type: 'despesa',
     },
+
+    // Nível 4 - Despesas Pessoais
     {
-      code: 201612,
-      level: 6,
-      description: 'INSS RETENCAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201613,
-      level: 6,
-      description: 'IRRF',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201614,
-      level: 6,
-      description: 'IPI',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201615,
-      level: 6,
-      description: 'FUNRURAL',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201616,
-      level: 6,
-      description: 'FGTS',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201617,
-      level: 6,
-      description: 'CFEM',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201618,
-      level: 6,
-      description: 'MULTAS DA OPERACAO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201619,
-      level: 6,
-      description: 'TAXAS',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201620,
-      level: 6,
-      description: 'SENAR',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201621,
-      level: 6,
-      description: 'DIFAL A RECOLHER',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201622,
-      level: 6,
-      description: 'FETAHB',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201623,
-      level: 6,
-      description: 'IAGRO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201624,
-      level: 6,
-      description: 'PCC A RECOLHER',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201625,
-      level: 6,
-      description: 'FUNDO DE DESENVOLVIMENTO A RECOLHER',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201626,
-      level: 6,
-      description: 'ICMS - COOPERADO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201627,
-      level: 6,
-      description: 'TAXAS ESTADUAIS',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201628,
-      level: 6,
-      description: 'PARCELAMENTO IRPJ',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201629,
-      level: 6,
-      description: 'PARCELAMENTO CSLL',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201630,
-      level: 6,
-      description: 'PARCELAMENTO FUNRURAL',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201631,
-      level: 6,
-      description: 'PARCELAMENTO MAPA',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201632,
-      level: 6,
-      description: 'PARCELAMETO ICMS',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201633,
-      level: 6,
-      description: 'PARCELAMENTO PREVIDENCIARIO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201634,
-      level: 6,
-      description: 'PARCELAMENTO MTE',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201635,
-      level: 6,
-      description: 'PARCELAMENTO IBAMA',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201636,
-      level: 6,
-      description: 'PARCELAMENTO SIMPLIFICADO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201637,
-      level: 6,
-      description: 'FUNDERSUL',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201638,
-      level: 6,
-      description: 'FUNDEMS',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201639,
-      level: 6,
-      description: 'FUNDEINFRA',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201640,
-      level: 6,
-      description: 'AUTO DE INFRACAO ICMS',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201641,
-      level: 6,
-      description: 'ICMS COOPERADO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201642,
-      level: 6,
-      description: 'CSLL S/ LUCRO',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 201643,
-      level: 6,
-      description: 'TRIBUTOS A RECUPERAR',
-      parent_id: 2016,
-      type: 'despesa',
-    },
-    {
-      code: 2018,
+      code: 2017,
       level: 4,
-      description: 'OUTRAS SAIDAS',
+      description: 'DESPESAS PESSOAIS',
       parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Despesas Pessoais
     {
-      code: 201801,
+      code: 201701,
       level: 6,
-      description: 'OUTRAS SAIDAS OPERACIONAIS',
-      parent_id: 2018,
+      description: 'DESPESAS NÃO IDENTIFICADAS',
+      parent_id: 2017,
       type: 'despesa',
     },
-    {
-      code: 201802,
-      level: 6,
-      description: 'DESFAZIMENTO OP VENDA ENTREGA FUTURA',
-      parent_id: 2018,
-      type: 'despesa',
-    },
-    {
-      code: 202,
-      level: 3,
-      description: 'SAIDAS FINANCEIRAS',
-      parent_id: 2,
-      type: 'despesa',
-    },
+
+    // Nível 4 - Despesas Financeiras
     {
       code: 2021,
       level: 4,
       description: 'DESPESAS FINANCEIRAS',
-      parent_id: 202,
+      parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Despesas Financeiras
     {
       code: 202101,
       level: 6,
@@ -1396,30 +774,9 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 202103,
-      level: 6,
-      description: 'RETIRADA, EMPRESTIMOS DE RECUR',
-      parent_id: 2021,
-      type: 'despesa',
-    },
-    {
-      code: 202104,
-      level: 6,
-      description: 'DIVIDENDOS OU DISTRIBUICAO DE LUCROS',
-      parent_id: 2021,
-      type: 'despesa',
-    },
-    {
       code: 202105,
       level: 6,
       description: 'IOF',
-      parent_id: 2021,
-      type: 'despesa',
-    },
-    {
-      code: 202106,
-      level: 6,
-      description: 'PRO-LABORE  CONDOMINIO',
       parent_id: 2021,
       type: 'despesa',
     },
@@ -1437,20 +794,17 @@ export async function seedCategories() {
       parent_id: 2021,
       type: 'despesa',
     },
-    {
-      code: 202109,
-      level: 6,
-      description: 'VARIACAO CAMBIAL PASSIVA PAGAMENTO',
-      parent_id: 2021,
-      type: 'despesa',
-    },
+
+    // Nível 4 - Outras Saídas Financeiras
     {
       code: 2022,
       level: 4,
       description: 'OUTRAS SAIDAS FINANCEIRAS',
-      parent_id: 202,
+      parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Outras Saídas Financeiras
     {
       code: 202201,
       level: 6,
@@ -1466,58 +820,27 @@ export async function seedCategories() {
       type: 'despesa',
     },
     {
-      code: 202203,
-      level: 6,
-      description: 'EMPRESTIMO A PAGAR - PARTES RELACIONADAS',
-      parent_id: 2022,
-      type: 'despesa',
-    },
-    {
       code: 202205,
       level: 6,
       description: 'CONSORCIOS',
       parent_id: 2022,
       type: 'despesa',
     },
-    {
-      code: 202206,
-      level: 6,
-      description: 'DEPOSITO CAUCAO',
-      parent_id: 2022,
-      type: 'despesa',
-    },
-    {
-      code: 202207,
-      level: 6,
-      description: 'EMP PAGAR - PESSOAS LIGADAS',
-      parent_id: 2022,
-      type: 'despesa',
-    },
-    {
-      code: 209,
-      level: 3,
-      description: 'SAIDA DE INVESTIMENTOS',
-      parent_id: 2,
-      type: 'despesa',
-    },
+
+    // Nível 4 - Saída de Investimentos
     {
       code: 2091,
       level: 4,
       description: 'SAIDA DE INVESTIMENTOS',
-      parent_id: 209,
+      parent_id: 201,
       type: 'despesa',
     },
+
+    // Nível 6 - Investimentos
     {
       code: 209101,
       level: 6,
       description: 'SAIDAS P/APLICACAO',
-      parent_id: 2091,
-      type: 'despesa',
-    },
-    {
-      code: 209102,
-      level: 6,
-      description: 'AQUISICAO DE ACOES/COTAS DE CA',
       parent_id: 2091,
       type: 'despesa',
     },
@@ -1542,6 +865,8 @@ export async function seedCategories() {
       parent_id: 2091,
       type: 'despesa',
     },
+
+    // Nível 3 - Contratos Bancários
     {
       code: 210,
       level: 3,
@@ -1549,13 +874,17 @@ export async function seedCategories() {
       parent_id: 2,
       type: 'despesa',
     },
+
+    // Nível 4 - Amortização de Empréstimos
     {
       code: 2102,
       level: 4,
-      description: 'AMORTIZACAO DE EMPRESTIMOS E F',
+      description: 'AMORTIZACAO DE EMPRESTIMOS FIN',
       parent_id: 210,
       type: 'despesa',
     },
+
+    // Nível 6 - Amortizações
     {
       code: 210201,
       level: 6,
@@ -1573,7 +902,7 @@ export async function seedCategories() {
     {
       code: 210203,
       level: 6,
-      description: 'PAGAMENTOS DE EMPRESTIMOS DE T',
+      description: 'PAGAMENTOS EMPRESTIMOS TERCEIROS',
       parent_id: 2102,
       type: 'despesa',
     },
@@ -1584,27 +913,8 @@ export async function seedCategories() {
       parent_id: 2102,
       type: 'despesa',
     },
-    {
-      code: 2103,
-      level: 4,
-      description: 'JUROS S. OPERACOES FINANCEIRAS',
-      parent_id: 210,
-      type: 'despesa',
-    },
-    {
-      code: 210301,
-      level: 6,
-      description: 'JUROS S. OPERACOES FINANCEIRAS',
-      parent_id: 2103,
-      type: 'despesa',
-    },
-    {
-      code: 210302,
-      level: 6,
-      description: 'INSTRUMENTOS FINANCEIROS PASSIVO',
-      parent_id: 2103,
-      type: 'despesa',
-    },
+
+    // Nível 1 - Conciliação Bancária
     {
       code: 3,
       level: 1,
@@ -1612,123 +922,34 @@ export async function seedCategories() {
       parent_id: null,
       type: 'conciliacao',
     },
-    {
-      code: 301,
-      level: 3,
-      description: 'TRANSFERENCIAS',
-      parent_id: 3,
-      type: 'conciliacao',
-    },
-    {
-      code: 3011,
-      level: 4,
-      description: 'TRANSFERENCIAS',
-      parent_id: 301,
-      type: 'conciliacao',
-    },
+
+    // Nível 6 - Transferências (sem níveis 3 e 4 no PDF)
     {
       code: 301101,
       level: 6,
       description: 'TRANSFERENCIAS BANCARIAS - ORI',
-      parent_id: 3011,
+      parent_id: 3,
       type: 'conciliacao',
     },
     {
       code: 301102,
       level: 6,
       description: 'TRANSFERENCIAS BANCARIAS - DES',
-      parent_id: 3011,
-      type: 'conciliacao',
-    },
-    {
-      code: 301103,
-      level: 6,
-      description: 'TRANSFERENCIAS CAIXAS',
-      parent_id: 3011,
+      parent_id: 3,
       type: 'conciliacao',
     },
     {
       code: 301104,
       level: 6,
       description: 'ESTORNOS',
-      parent_id: 3011,
+      parent_id: 3,
       type: 'conciliacao',
     },
     {
       code: 301105,
       level: 6,
-      description: 'TAXAS',
-      parent_id: 3011,
-      type: 'conciliacao',
-    },
-    {
-      code: 3012,
-      level: 4,
-      description: 'INTERCOMPANY',
-      parent_id: 301,
-      type: 'conciliacao',
-    },
-    {
-      code: 301201,
-      level: 6,
-      description: 'INTERCOMPANY',
-      parent_id: 3012,
-      type: 'conciliacao',
-    },
-    {
-      code: 3013,
-      level: 4,
-      description: 'TRANSITORIAS',
-      parent_id: 301,
-      type: 'conciliacao',
-    },
-    {
-      code: 301301,
-      level: 6,
-      description: 'TRANSITORIA EMPRESTIMOS',
-      parent_id: 3013,
-      type: 'conciliacao',
-    },
-    {
-      code: 301302,
-      level: 6,
-      description: 'TRANSITORIA  ENCONTRO DE CONTAS',
-      parent_id: 3013,
-      type: 'conciliacao',
-    },
-    {
-      code: 301303,
-      level: 6,
-      description: 'RECUPERACAO DESPESAS',
-      parent_id: 3013,
-      type: 'conciliacao',
-    },
-    {
-      code: 3014,
-      level: 4,
-      description: 'SAIDAS APLICACOES',
-      parent_id: 301,
-      type: 'conciliacao',
-    },
-    {
-      code: 301401,
-      level: 6,
-      description: 'AQUISICAO DE ACOES/COTAS DE CA',
-      parent_id: 3014,
-      type: 'conciliacao',
-    },
-    {
-      code: 301402,
-      level: 6,
-      description: 'VALORES BLOQUEADOS',
-      parent_id: 3014,
-      type: 'conciliacao',
-    },
-    {
-      code: 301403,
-      level: 6,
-      description: 'DEBENTURES',
-      parent_id: 3014,
+      description: 'TARIFAS MANUTENÇAO DA CONTA',
+      parent_id: 3,
       type: 'conciliacao',
     },
   ]
