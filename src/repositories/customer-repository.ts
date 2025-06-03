@@ -6,4 +6,5 @@ export interface CustomerRepository {
   findByCpf(cpf: string): Promise<Customer | null>
   delete(id: string): Promise<void>
   getCustomer(): Promise<Customer[] | []>
+  update(id: string, data: Prisma.CustomerUpdateInput): Promise<Customer | null>
 }

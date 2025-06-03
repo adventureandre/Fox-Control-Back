@@ -12,14 +12,21 @@ export async function categoriesRoutes(app: FastifyInstance) {
       schema: {
         description: 'Lista todas as categorias cadastradas',
         tags: ['Categorias'],
+        security: [{ bearerAuth: [] }],
         response: {
           200: {
             type: 'array',
             items: {
               type: 'object',
               properties: {
-                code: { type: 'string', description: 'Código da categoria' },
-                name: { type: 'string', description: 'Nome da categoria' },
+                code: { type: 'string' },
+                description: { type: 'string' },
+                level: { type: 'number', description: 'Nível da categoria' },
+                type: { type: 'string', description: 'Tipo da categoria' },
+                parent_id: {
+                  type: 'string',
+                  description: 'ID da categoria pai',
+                },
               },
             },
           },
@@ -30,11 +37,45 @@ export async function categoriesRoutes(app: FastifyInstance) {
             },
           },
         },
-        security: [{ bearerAuth: [] }],
       },
     },
     listCategories,
   )
 
-  app.get('/categories/:code', getCategory)
+  app.get(
+    '/categories/:code',
+    {
+      schema: {
+        description: 'Busca uma categoria pelo código',
+        tags: ['Categorias'],
+        security: [{ bearerAuth: [] }],
+        params: {
+          type: 'object',
+          properties: {
+            code: { type: 'string', description: 'Código da categoria' },
+          },
+          required: ['code'],
+        },
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              code: { type: 'string' },
+              description: { type: 'string' },
+              level: { type: 'number', description: 'Nível da categoria' },
+              type: { type: 'string', description: 'Tipo da categoria' },
+              parent_id: { type: 'string', description: 'ID da categoria pai' },
+            },
+          },
+          404: {
+            type: 'object',
+            properties: {
+              error: { type: 'string' },
+            },
+          },
+        },
+      },
+    },
+    getCategory,
+  )
 }

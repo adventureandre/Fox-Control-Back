@@ -22,4 +22,8 @@ export class PrismaCustomerRepository implements CustomerRepository {
   async getCustomer() {
     return await prisma.customer.findMany()
   }
+
+  async update(id: string, data: Prisma.CustomerUpdateInput) {
+    return await prisma.customer.update({ where: { id }, data })
+  }
 }
