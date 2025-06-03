@@ -18,7 +18,7 @@ export class PrismaSupplierRepository implements SupplierRepository {
   async delete(id: string) {
     await prisma.supplier.delete({ where: { id } })
   }
-
+  
   async update({ id, data }: { id: string; data: Prisma.SupplierUpdateInput }) {
     return await prisma.supplier.update({
       where: { id },
