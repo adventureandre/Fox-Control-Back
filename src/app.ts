@@ -37,7 +37,7 @@ app.register(fastifyJwt, {
 app.register(fastifySwagger, {
   openapi: {
     info: {
-      title: 'Desapega Vendas API',
+      title: 'Fox-Control API',
       description: 'Documentação da API do Dashboard Financeiro',
       version: '1.0.0',
     },
