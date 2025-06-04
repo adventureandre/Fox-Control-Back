@@ -114,8 +114,6 @@ model Category {
   description String
   type        String?
   parent_id   Int?
-  parent      Category?  @relation("CategoryToSubcategories", fields: [parent_id], references: [code])
-  children    Category[] @relation("CategoryToSubcategories")
 
   @@map("categories")
 }
