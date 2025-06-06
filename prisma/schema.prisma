@@ -94,6 +94,7 @@ model Transaction {
   conta       String
   banco       String?
   tipo        String?
+  harvest     String? 
   categoria   Int?
   imported    Boolean  @default(false)
   conciliado  Boolean  @default(false)
