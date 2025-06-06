@@ -35,6 +35,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       status: 'active',
       avatar_url: data.avatar_url ?? null,
       created_at: new Date(),
+      updated_at: new Date(),
     }
 
     this.items.push(user)
@@ -54,6 +55,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       updateUser.phone = params.data.phone as string
       updateUser.status = params.data.status as string
       updateUser.avatar_url = params.data.avatar_url as string
+      updateUser.updated_at = new Date()
 
       this.items[userIndex] = updateUser
 
