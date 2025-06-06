@@ -10,6 +10,7 @@ interface UpdateTransactionUseCaseRequest {
   categoria?: number | null
   conciliado?: boolean
   conta?: string
+  safra?: string
   imported?: boolean
   confirmed?: boolean
   producer_id?: string
@@ -24,6 +25,7 @@ export class UpdateTransactionUseCase {
     date,
     valor,
     categoria,
+    safra,
     conciliado,
     confirmed,
     conta,
@@ -44,6 +46,7 @@ export class UpdateTransactionUseCase {
         date,
         categoria,
         confirmed,
+        safra,
         imported,
         conta: conta ?? 'manual',
         conciliado: !!conciliado,

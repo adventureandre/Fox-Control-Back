@@ -13,6 +13,7 @@ export async function updateTransaction(
       z.string().transform((val) => parseFloat(parseFloat(val).toFixed(2))),
       z.number().transform((val) => parseFloat(val.toFixed(2))),
     ]),
+    safra: z.string().optional(),
     date: z.string().transform((val) => {
       if (val.includes('T')) {
         return new Date(val)
@@ -27,17 +28,7 @@ export async function updateTransaction(
     producer_id: z.string().optional(),
   })
 
-  const {
-    nome,
-    valor,
-    date,
-    categoria,
-    conciliado,
-    conta,
-    confirmed,
-    imported,
-    producer_id,
-  } = updateTransactionSchema.parse(request.body)
+  const data = updateTransactionSchema.parse(request.body)
 
   const { id } = request.params as { id: string }
 
@@ -45,15 +36,7 @@ export async function updateTransaction(
     const updateTransactionUseCase = makeUpdateTransactionUseCase()
     const transaction = await updateTransactionUseCase.execute({
       id,
-      nome,
-      valor,
-      date,
-      categoria,
-      conciliado,
-      conta,
-      confirmed,
-      imported,
-      producer_id,
+      ...data,
     })
 
     return reply.status(200).send(transaction)
