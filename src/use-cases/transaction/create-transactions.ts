@@ -14,6 +14,7 @@ interface CreateTransactionsUseCaseRequest {
   banco?: string | null
   user_id: string
   imported?: boolean
+  harvest?: string
   confirmed?: boolean
   producer_id?: string
 }
@@ -36,6 +37,7 @@ export class CreateTransactionsUseCase {
     categoria,
     conciliado,
     tipo,
+    harvest,
     banco,
     user_id,
     imported,
@@ -63,6 +65,7 @@ export class CreateTransactionsUseCase {
       categoria: categoria ?? null,
       conciliado: conciliado ?? false,
       tipo,
+      harvest,
       banco,
       user_id,
       imported,
