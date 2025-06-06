@@ -25,8 +25,6 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
       request.body,
     )
 
-    console.log('Avatar: ', avatar_url)
-
     // Verifica se pelo menos um campo foi fornecido
     if (!name && !email && !avatar_url) {
       return reply.status(400).send({

@@ -54,13 +54,11 @@ export async function uploadImage(
       )
 
       try {
-        await fs.access(oldImagePath) // Verifica se o arquivo existe
-        await fs.unlink(oldImagePath) // Remove o arquivo antigo
+        await fs.unlink(oldImagePath).catch(() => {})
       } catch (error) {
-        console.error(
-          'Erro ao remover a imagem antiga ou arquivo não encontrado:',
-          error,
-        )
+        // Este bloco não deve ser executado devido ao .catch() acima,
+        // mas mantemos por segurança
+        console.log('Removendo imagem antiga e continuando com o upload')
       }
     }
 
