@@ -30,38 +30,39 @@ model User {
 }
 
 model Producers {
-  id          String            @id @default(cuid())
-  name        String
-  cpf         String            @unique
-  phone       String?
-  group       String?
-  farm        String?
-  email       String?
-  address     String?
-  city        String?
-  state       String?
-  active      Boolean           @default(true)
-  created_at  DateTime          @default(now())
-  updated_at  DateTime          @updatedAt
+  id         String   @id @default(cuid())
+  name       String
+  cpf        String   @unique
+  phone      String?
+  group      String?
+  farm       String?
+  email      String?
+  address    String?
+  city       String?
+  state      String?
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   BankAccount ProducerAccount[]
   Transaction Transaction[]
   Farm        Farm[]
+  Immobilized Immobilized[]
 
   @@map("producers")
 }
 
 model Farm {
-  id           String  @id @default(cuid())
-  name         String
-  city         String
-  hectares     Int
-  latitude     Decimal
-  longitude    Decimal
+  id          String   @id @default(cuid())
+  name        String
+  city        String
+  hectares    Int
+  latitude    Decimal
+  longitude   Decimal
   producer_id String
-  active       Boolean  @default(true)
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  active      Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 
   producer Producers @relation(fields: [producer_id], references: [id])
 
@@ -89,12 +90,12 @@ model Transaction {
   id          String   @id @default(cuid())
   date        DateTime
   nome        String
-  valor       Float
+  valor       Decimal
   confirmed   Boolean  @default(false)
   conta       String
   banco       String?
   tipo        String?
-  safra       String? 
+  safra       String?
   categoria   Int?
   imported    Boolean  @default(false)
   conciliado  Boolean  @default(false)
@@ -110,7 +111,7 @@ model Transaction {
 }
 
 model Category {
-  code        Int        @id @unique
+  code        Int     @id @unique
   level       Int
   description String
   type        String?
@@ -151,4 +152,24 @@ model Supplier {
   updated_at        DateTime @updatedAt
 
   @@map("suppliers")
+}
+
+model Immobilized {
+  id                    String    @id @default(cuid())
+  name                  String
+  current_value         Decimal
+  estimated_value       Decimal
+  status                String
+  avaliableAsCollateral Boolean   @default(false) @map("avaliable_as_collateral")
+  depreciationRate      Decimal?  @map("depreciation_rate")
+  acquisitionDate       DateTime  @map("acquisition_date")
+  usefulLifeYears       Int?      @map("useful_life_years")
+  notes                 String?
+  producer_id           String
+  producer              Producers @relation(fields: [producer_id], references: [id])
+  active                Boolean   @default(true)
+  created_at            DateTime  @default(now())
+  updated_at            DateTime  @updatedAt
+
+  @@map("immobilized")
 }
