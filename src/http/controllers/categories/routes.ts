@@ -23,6 +23,10 @@ export async function categoriesRoutes(app: FastifyInstance) {
                 description: { type: 'string' },
                 level: { type: 'number', description: 'Nível da categoria' },
                 type: { type: 'string', description: 'Tipo da categoria' },
+                modality: {
+                  type: 'string',
+                  description: 'Modalidade da categoria',
+                },
                 parent_id: {
                   type: 'string',
                   description: 'ID da categoria pai',
@@ -64,6 +68,10 @@ export async function categoriesRoutes(app: FastifyInstance) {
               description: { type: 'string' },
               level: { type: 'number', description: 'Nível da categoria' },
               type: { type: 'string', description: 'Tipo da categoria' },
+              modality: {
+                type: 'string',
+                description: 'Modalidade da categoria',
+              },
               parent_id: { type: 'string', description: 'ID da categoria pai' },
             },
           },

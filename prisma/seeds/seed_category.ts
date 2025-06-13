@@ -9,6 +9,7 @@ export async function seedCategories() {
       description: 'ENTRADAS',
       parent_id: null,
       type: 'receita',
+      modality: 'ENTRADAS',
     },
 
     // Nível 3 - Receita
@@ -18,6 +19,7 @@ export async function seedCategories() {
       description: 'RECEITA',
       parent_id: 1,
       type: 'receita',
+      modality: 'RECEITA',
     },
 
     // Nível 4 - Receita Semente
@@ -27,6 +29,7 @@ export async function seedCategories() {
       description: 'RECEITA SEMENTE',
       parent_id: 101,
       type: 'receita',
+      modality: 'RECEITA',
     },
 
     // Nível 6 - Sementes
@@ -36,6 +39,7 @@ export async function seedCategories() {
       description: 'SEMENTE DE SOJA',
       parent_id: 1011,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101102,
@@ -43,6 +47,7 @@ export async function seedCategories() {
       description: 'SEMENTE DE MILHO',
       parent_id: 1011,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101103,
@@ -50,6 +55,7 @@ export async function seedCategories() {
       description: 'SEMENTE DE SORGO',
       parent_id: 1011,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101104,
@@ -57,6 +63,7 @@ export async function seedCategories() {
       description: 'SEMENTE DE ARROZ',
       parent_id: 1011,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101105,
@@ -64,6 +71,7 @@ export async function seedCategories() {
       description: 'GRAO DE MILHETO',
       parent_id: 1011,
       type: 'receita',
+      modality: 'RECEITA',
     },
 
     // Nível 4 - Receita Grão
@@ -73,6 +81,7 @@ export async function seedCategories() {
       description: 'RECEITA GRÃO',
       parent_id: 101,
       type: 'receita',
+      modality: 'RECEITA',
     },
 
     // Nível 6 - Grãos
@@ -82,6 +91,7 @@ export async function seedCategories() {
       description: 'SOJA',
       parent_id: 1012,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101202,
@@ -89,6 +99,7 @@ export async function seedCategories() {
       description: 'MILHO',
       parent_id: 1012,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101207,
@@ -96,6 +107,7 @@ export async function seedCategories() {
       description: 'FEIJÃO',
       parent_id: 1012,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101208,
@@ -103,6 +115,7 @@ export async function seedCategories() {
       description: 'SORGO',
       parent_id: 1012,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101209,
@@ -110,6 +123,7 @@ export async function seedCategories() {
       description: 'MILHETO',
       parent_id: 1012,
       type: 'receita',
+      modality: 'RECEITA',
     },
 
     // Nível 4 - Prestação de Serviço
@@ -119,6 +133,7 @@ export async function seedCategories() {
       description: 'PRESTACAO DE SERVIÇO',
       parent_id: 101,
       type: 'receita',
+      modality: 'PRESTACAO DE SERVICO',
     },
 
     // Nível 6 - Serviços
@@ -128,6 +143,7 @@ export async function seedCategories() {
       description: 'ARMAZENAGEM',
       parent_id: 1014,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101692,
@@ -135,6 +151,7 @@ export async function seedCategories() {
       description: 'TRANSPORTE',
       parent_id: 1014,
       type: 'receita',
+      modality: 'RECEITA',
     },
     {
       code: 101404,
@@ -142,6 +159,7 @@ export async function seedCategories() {
       description: 'OUTROS SERVIÇOS',
       parent_id: 1014,
       type: 'receita',
+      modality: 'RECEITA',
     },
 
     // Nível 4 - Outras Entradas Operacionais
@@ -151,6 +169,7 @@ export async function seedCategories() {
       description: 'OUTRAS ENTRADAS OPERACIONAIS',
       parent_id: 101,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS OPERACIONAIS',
     },
 
     // Nível 6 - Outras Entradas
@@ -160,6 +179,7 @@ export async function seedCategories() {
       description: 'VENDA DE IMOBILIZADO',
       parent_id: 1016,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 101604,
@@ -167,6 +187,7 @@ export async function seedCategories() {
       description: 'OUTRAS ENTRADAS OPERACIONAIS',
       parent_id: 1016,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 101605,
@@ -174,6 +195,7 @@ export async function seedCategories() {
       description: 'ADIANTAMENTO CLIENTES',
       parent_id: 1016,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 101607,
@@ -181,6 +203,7 @@ export async function seedCategories() {
       description: 'ADIANTAMENTO INTERCOMPANY',
       parent_id: 1016,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 101613,
@@ -188,6 +211,7 @@ export async function seedCategories() {
       description: 'ARRENDAMENTOS A RECEBER',
       parent_id: 1016,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
 
     // Nível 4 - Receita Financeira
@@ -197,6 +221,7 @@ export async function seedCategories() {
       description: 'RECEITA FINANCEIRA',
       parent_id: 101,
       type: 'receita',
+      modality: 'RECEITA FINANCEIRA',
     },
 
     // Nível 6 - Receitas Financeiras
@@ -206,6 +231,7 @@ export async function seedCategories() {
       description: 'RECEBIMENTO DE EMPRÉSTIMOS',
       parent_id: 1021,
       type: 'receita',
+      modality: 'OP FINANCEIRAS',
     },
     {
       code: 102103,
@@ -213,6 +239,7 @@ export async function seedCategories() {
       description: 'APORTE, EMPRÉSTIMOS E RECURSOS',
       parent_id: 1021,
       type: 'receita',
+      modality: 'OP FINANCEIRAS',
     },
 
     // Nível 4 - Outras Entradas Financeiras
@@ -222,6 +249,7 @@ export async function seedCategories() {
       description: 'OUTRAS ENTRADAS FINANCEIRAS',
       parent_id: 101,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS FINANCEIRAS',
     },
 
     // Nível 6 - Outras Entradas Financeiras
@@ -231,6 +259,7 @@ export async function seedCategories() {
       description: 'OUTRAS ENTRADAS FINANCEIRAS',
       parent_id: 1022,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 102202,
@@ -238,6 +267,7 @@ export async function seedCategories() {
       description: 'ALUGUEIS RECEBIDOS',
       parent_id: 1022,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 102204,
@@ -245,6 +275,7 @@ export async function seedCategories() {
       description: 'CREDITO CONSÓRCIO',
       parent_id: 1022,
       type: 'receita',
+      modality: 'OP FINANCEIRAS',
     },
 
     // Nível 4 - Entrada de Investimentos
@@ -254,6 +285,7 @@ export async function seedCategories() {
       description: 'ENTRADA DE INVESTIMENTOS',
       parent_id: 101,
       type: 'receita',
+      modality: 'ENTRADA DE INVESTIMENTOS',
     },
 
     // Nível 6 - Investimentos
@@ -263,6 +295,7 @@ export async function seedCategories() {
       description: 'RENDIMENTO S/APLICACÕES',
       parent_id: 1091,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 109102,
@@ -270,6 +303,7 @@ export async function seedCategories() {
       description: 'RESGATE DE APLICAÇÕES',
       parent_id: 1091,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 109106,
@@ -277,6 +311,7 @@ export async function seedCategories() {
       description: 'TÍTULOS DE CAPITALIZAÇÃO',
       parent_id: 1091,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 109107,
@@ -284,6 +319,7 @@ export async function seedCategories() {
       description: 'PREVIDENCIA PRIVADA',
       parent_id: 1091,
       type: 'receita',
+      modality: 'OUTRAS ENTRADAS',
     },
 
     // Nível 4 - Movimentações Bancárias
@@ -293,6 +329,7 @@ export async function seedCategories() {
       description: 'MOVIMENTAÇÕES BANCARIAS',
       parent_id: 101,
       type: 'receita',
+      modality: 'MOVIMENTACOES BANCARIAS',
     },
 
     // Nível 6 - Movimentações Bancárias
@@ -302,6 +339,7 @@ export async function seedCategories() {
       description: 'CAPTAÇÃO DE EMPRÉSTIMOS',
       parent_id: 1101,
       type: 'receita',
+      modality: 'OP FINANCEIRAS',
     },
     {
       code: 110102,
@@ -309,6 +347,7 @@ export async function seedCategories() {
       description: 'CAPTAÇÃO DE FINANCIAMENTO',
       parent_id: 1101,
       type: 'receita',
+      modality: 'OP FINANCEIRAS',
     },
 
     // Nível 1 - Saídas
@@ -318,6 +357,7 @@ export async function seedCategories() {
       description: 'SAIDA',
       parent_id: null,
       type: 'despesa',
+      modality: 'SAIDA',
     },
 
     // Nível 3 - Despesas
@@ -327,6 +367,7 @@ export async function seedCategories() {
       description: 'DESPESAS',
       parent_id: 2,
       type: 'despesa',
+      modality: 'DESPESAS',
     },
 
     // Nível 4 - Pessoas
@@ -336,6 +377,7 @@ export async function seedCategories() {
       description: 'PESSOAS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
 
     // Nível 6 - Pessoas
@@ -345,6 +387,7 @@ export async function seedCategories() {
       description: 'PRO-LABORE',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201103,
@@ -352,6 +395,7 @@ export async function seedCategories() {
       description: 'SALARIO',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201104,
@@ -359,6 +403,7 @@ export async function seedCategories() {
       description: 'FERIAS',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201105,
@@ -366,6 +411,7 @@ export async function seedCategories() {
       description: '1 PARCELA 13',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201106,
@@ -373,6 +419,7 @@ export async function seedCategories() {
       description: '2 PARCELA 13',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201108,
@@ -380,6 +427,7 @@ export async function seedCategories() {
       description: 'RESCISÃO A PAGAR',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201109,
@@ -387,6 +435,7 @@ export async function seedCategories() {
       description: 'ADIANTAMENTO SALARIAL',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201110,
@@ -394,6 +443,7 @@ export async function seedCategories() {
       description: 'PLANO DE SAUDE',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201111,
@@ -401,6 +451,7 @@ export async function seedCategories() {
       description: 'LANCHES',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201113,
@@ -408,6 +459,7 @@ export async function seedCategories() {
       description: 'PLR A PAGAR',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201114,
@@ -415,6 +467,7 @@ export async function seedCategories() {
       description: 'INDENIZACAO PROCESSOS TRABALHISTAS',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201117,
@@ -422,6 +475,7 @@ export async function seedCategories() {
       description: 'FGTS',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201118,
@@ -429,6 +483,7 @@ export async function seedCategories() {
       description: 'GRRF',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201120,
@@ -436,6 +491,7 @@ export async function seedCategories() {
       description: 'GRATIFICACOES',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201121,
@@ -443,6 +499,7 @@ export async function seedCategories() {
       description: 'DIARIAS',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201123,
@@ -450,6 +507,7 @@ export async function seedCategories() {
       description: 'ADIANTAMENTO DE FERIAS',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201124,
@@ -457,6 +515,7 @@ export async function seedCategories() {
       description: 'AJUDA DE CUSTO TRANSPORTE',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
     {
       code: 201127,
@@ -464,6 +523,7 @@ export async function seedCategories() {
       description: '13 PRO LABORE',
       parent_id: 2011,
       type: 'despesa',
+      modality: 'PESSOAS',
     },
 
     // Nível 4 - Fornecedores
@@ -473,6 +533,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES',
       parent_id: 201,
       type: 'despesa',
+      modality: 'FORNECEDORES',
     },
 
     // Nível 6 - Fornecedores
@@ -482,6 +543,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES DE INSUMOS',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201202,
@@ -489,6 +551,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES DE CALCÁRIO',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201203,
@@ -496,6 +559,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES DE ADUBO',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201204,
@@ -503,6 +567,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES DE SEMENTE',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201205,
@@ -510,6 +575,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES DE QUIMICO',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201206,
@@ -517,6 +583,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES DE BIOLOGICO',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201207,
@@ -524,6 +591,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES DE NUTRIÇÃO',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201208,
@@ -531,6 +599,7 @@ export async function seedCategories() {
       description: 'FORNECEDORES PJ DIVERSOS',
       parent_id: 2012,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
 
     // Nível 4 - Prestação de Serviços
@@ -540,6 +609,7 @@ export async function seedCategories() {
       description: 'PRESTACAO DE SERVICOS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'PRESTACAO DE SERVICOS',
     },
 
     // Nível 6 - Serviços
@@ -549,6 +619,7 @@ export async function seedCategories() {
       description: 'PRESTACAO DE SERVICO DE PULVERIZACAO',
       parent_id: 2013,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201302,
@@ -556,6 +627,7 @@ export async function seedCategories() {
       description: 'PRESTACAO DE SERVICO DE COLHEITA',
       parent_id: 2013,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201303,
@@ -563,6 +635,7 @@ export async function seedCategories() {
       description: 'PRESTACAO DE SERVICO DE TRANSPORTE',
       parent_id: 2013,
       type: 'despesa',
+      modality: 'CUSTO',
     },
 
     // Nível 4 - Saídas Específicas
@@ -572,6 +645,7 @@ export async function seedCategories() {
       description: 'SAIDAS ESPECIFICAS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'SAIDAS ESPECIFICAS',
     },
 
     // Nível 6 - Saídas Específicas
@@ -581,6 +655,7 @@ export async function seedCategories() {
       description: 'ARRENDAMENTOS',
       parent_id: 2014,
       type: 'despesa',
+      modality: 'CUSTO',
     },
 
     // Nível 4 - Saídas Administrativas/Comerciais
@@ -590,6 +665,7 @@ export async function seedCategories() {
       description: 'SAIDAS ADMINISTRATIVAS/COMERCIAIS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'SAIDAS ADMINISTRATIVAS/COMERCIAIS',
     },
 
     // Nível 6 - Saídas Administrativas
@@ -599,6 +675,7 @@ export async function seedCategories() {
       description: 'FRETE S/COMPRA',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'CUSTO',
     },
     {
       code: 201502,
@@ -606,6 +683,7 @@ export async function seedCategories() {
       description: 'FRETE S/ VENDA',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201505,
@@ -613,6 +691,7 @@ export async function seedCategories() {
       description: 'COMUNICACAO E MARKETING',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201506,
@@ -620,6 +699,7 @@ export async function seedCategories() {
       description: 'MATERIAIS DIVERSOS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201507,
@@ -627,6 +707,7 @@ export async function seedCategories() {
       description: 'COMBUSTIVEIS E LUBRIFICANTES',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201509,
@@ -634,6 +715,7 @@ export async function seedCategories() {
       description: 'SEGUROS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201510,
@@ -641,6 +723,7 @@ export async function seedCategories() {
       description: 'CONSULTORIAS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201513,
@@ -648,6 +731,7 @@ export async function seedCategories() {
       description: 'ADIANTAMENTO FORNECEDOR',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201514,
@@ -655,6 +739,7 @@ export async function seedCategories() {
       description: 'ALUGUEIS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201515,
@@ -662,6 +747,7 @@ export async function seedCategories() {
       description: 'CONCESSIONARIAS E TELECOM',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201516,
@@ -669,6 +755,7 @@ export async function seedCategories() {
       description: 'GASTOS GERAIS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201519,
@@ -676,6 +763,7 @@ export async function seedCategories() {
       description: 'MULTAS DIVERSAS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201520,
@@ -683,6 +771,7 @@ export async function seedCategories() {
       description: 'CONTRIBUICÕES ASSOCIATIVAS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201522,
@@ -690,6 +779,7 @@ export async function seedCategories() {
       description: 'ASSESSORIA ADM',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201524,
@@ -697,6 +787,7 @@ export async function seedCategories() {
       description: 'REGISTRO CARTORIOS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201529,
@@ -704,6 +795,7 @@ export async function seedCategories() {
       description: 'PATROCINIOS',
       parent_id: 2015,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
 
     // Nível 4 - Tributos e Taxas
@@ -713,6 +805,7 @@ export async function seedCategories() {
       description: 'TRIBUTOS E TAXAS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'TRIBUTOS E TAXAS',
     },
 
     // Nível 6 - Tributos
@@ -722,6 +815,7 @@ export async function seedCategories() {
       description: 'IRPF',
       parent_id: 2016,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
     {
       code: 201611,
@@ -729,6 +823,7 @@ export async function seedCategories() {
       description: 'IPTU',
       parent_id: 2016,
       type: 'despesa',
+      modality: 'DESPESA OP',
     },
 
     // Nível 4 - Despesas Pessoais
@@ -738,6 +833,7 @@ export async function seedCategories() {
       description: 'DESPESAS PESSOAIS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'DESPESAS PESSOAIS',
     },
 
     // Nível 6 - Despesas Pessoais
@@ -747,6 +843,7 @@ export async function seedCategories() {
       description: 'DESPESAS NÃO IDENTIFICADAS',
       parent_id: 2017,
       type: 'despesa',
+      modality: 'DESPESAS NÃO IDENTIFICADAS',
     },
 
     // Nível 4 - Despesas Financeiras
@@ -756,6 +853,7 @@ export async function seedCategories() {
       description: 'DESPESAS FINANCEIRAS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'DESPESA FIN',
     },
 
     // Nível 6 - Despesas Financeiras
@@ -765,6 +863,7 @@ export async function seedCategories() {
       description: 'JUROS E MULTAS DE FORNECEDORES',
       parent_id: 2021,
       type: 'despesa',
+      modality: 'DESPESA FIN',
     },
     {
       code: 202102,
@@ -772,6 +871,7 @@ export async function seedCategories() {
       description: 'DESCONTOS CONCEDIDOS A CLIENTE',
       parent_id: 2021,
       type: 'despesa',
+      modality: 'DESPESA FIN',
     },
     {
       code: 202105,
@@ -779,6 +879,7 @@ export async function seedCategories() {
       description: 'IOF',
       parent_id: 2021,
       type: 'despesa',
+      modality: 'DESPESA FIN',
     },
     {
       code: 202107,
@@ -786,6 +887,7 @@ export async function seedCategories() {
       description: 'IRRF S/APLICACAO',
       parent_id: 2021,
       type: 'despesa',
+      modality: 'DESPESA FIN',
     },
     {
       code: 202108,
@@ -793,6 +895,7 @@ export async function seedCategories() {
       description: 'JUROS S/ LIMITE',
       parent_id: 2021,
       type: 'despesa',
+      modality: 'DESPESA FIN',
     },
 
     // Nível 4 - Outras Saídas Financeiras
@@ -802,6 +905,7 @@ export async function seedCategories() {
       description: 'OUTRAS SAIDAS FINANCEIRAS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
 
     // Nível 6 - Outras Saídas Financeiras
@@ -811,6 +915,7 @@ export async function seedCategories() {
       description: 'OUTRAS SAIDAS FINANCEIRAS',
       parent_id: 2022,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
     {
       code: 202202,
@@ -818,6 +923,7 @@ export async function seedCategories() {
       description: 'CONCESSAO DE EMPRESTIMOS',
       parent_id: 2022,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
     {
       code: 202205,
@@ -825,6 +931,7 @@ export async function seedCategories() {
       description: 'CONSORCIOS',
       parent_id: 2022,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
 
     // Nível 4 - Saída de Investimentos
@@ -834,6 +941,7 @@ export async function seedCategories() {
       description: 'SAIDA DE INVESTIMENTOS',
       parent_id: 201,
       type: 'despesa',
+      modality: 'OUTRAS SAIDAS',
     },
 
     // Nível 6 - Investimentos
@@ -843,6 +951,7 @@ export async function seedCategories() {
       description: 'SAIDAS P/APLICACAO',
       parent_id: 2091,
       type: 'despesa',
+      modality: 'OUTRAS SAIDAS',
     },
     {
       code: 209103,
@@ -850,6 +959,7 @@ export async function seedCategories() {
       description: 'AQUISICAO DE IMOBILIZADOS',
       parent_id: 2091,
       type: 'despesa',
+      modality: 'CAPEX',
     },
     {
       code: 209104,
@@ -857,6 +967,7 @@ export async function seedCategories() {
       description: 'TITULOS DE CAPITALIZACAO',
       parent_id: 2091,
       type: 'despesa',
+      modality: 'OUTRAS SAIDAS',
     },
     {
       code: 209105,
@@ -864,6 +975,7 @@ export async function seedCategories() {
       description: 'PREVIDENCIA PRIVADA',
       parent_id: 2091,
       type: 'despesa',
+      modality: 'OUTRAS SAIDAS',
     },
 
     // Nível 3 - Contratos Bancários
@@ -873,6 +985,7 @@ export async function seedCategories() {
       description: 'CONTRATOS BANCARIOS',
       parent_id: 2,
       type: 'despesa',
+      modality: 'CONTRATOS BANCARIOS',
     },
 
     // Nível 4 - Amortização de Empréstimos
@@ -882,6 +995,7 @@ export async function seedCategories() {
       description: 'AMORTIZACAO DE EMPRESTIMOS FIN',
       parent_id: 210,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
 
     // Nível 6 - Amortizações
@@ -891,6 +1005,7 @@ export async function seedCategories() {
       description: 'PAGAMENTOS DE EMPRESTIMOS',
       parent_id: 2102,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
     {
       code: 210202,
@@ -898,6 +1013,7 @@ export async function seedCategories() {
       description: 'PAGAMENTOS DE FINANCIAMENTO',
       parent_id: 2102,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
     {
       code: 210203,
@@ -905,6 +1021,7 @@ export async function seedCategories() {
       description: 'PAGAMENTOS EMPRESTIMOS TERCEIROS',
       parent_id: 2102,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
     {
       code: 210204,
@@ -912,6 +1029,7 @@ export async function seedCategories() {
       description: 'INSTRUMENTOS FINANCEIROS E DERIVATIVOS',
       parent_id: 2102,
       type: 'despesa',
+      modality: 'OP FINANCEIRAS',
     },
 
     // Nível 1 - Conciliação Bancária
@@ -921,6 +1039,7 @@ export async function seedCategories() {
       description: 'CONCILIACAO BANCARIA',
       parent_id: null,
       type: 'conciliacao',
+      modality: 'CONCILIACAO BANCARIA',
     },
 
     // Nível 6 - Transferências (sem níveis 3 e 4 no PDF)
@@ -930,6 +1049,7 @@ export async function seedCategories() {
       description: 'TRANSFERENCIAS BANCARIAS - ORI',
       parent_id: 3,
       type: 'conciliacao',
+      modality: 'OUTRAS SAIDAS',
     },
     {
       code: 301102,
@@ -937,6 +1057,7 @@ export async function seedCategories() {
       description: 'TRANSFERENCIAS BANCARIAS - DES',
       parent_id: 3,
       type: 'conciliacao',
+      modality: 'OUTRAS ENTRADAS',
     },
     {
       code: 301104,
@@ -944,6 +1065,7 @@ export async function seedCategories() {
       description: 'ESTORNOS',
       parent_id: 3,
       type: 'conciliacao',
+      modality: 'ESTORNOS',
     },
     {
       code: 301105,
@@ -951,12 +1073,14 @@ export async function seedCategories() {
       description: 'TARIFAS MANUTENÇAO DA CONTA',
       parent_id: 3,
       type: 'conciliacao',
+      modality: 'DESPESA FIN',
     },
   ]
 
-  for (const category of categories) {
-    await prisma.category.create({
-      data: category,
-    })
-  }
+  await prisma.category.deleteMany()
+
+  await prisma.category.createMany({
+    data: categories,
+    skipDuplicates: true,
+  })
 }

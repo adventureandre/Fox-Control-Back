@@ -4,7 +4,16 @@ import { prisma } from '@/lib/prisma'
 
 export class PrismaCategoriesRepository implements CategoriesRepository {
   async findAll() {
-    return await prisma.category.findMany()
+    return await prisma.category.findMany({
+      select: {
+        code: true,
+        level: true,
+        description: true,
+        modality: true,
+        type: true,
+        parent_id: true,
+      },
+    })
   }
 
   async findById(code: number) {
