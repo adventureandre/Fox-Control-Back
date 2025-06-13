@@ -114,6 +114,7 @@ model Category {
   code        Int     @id @unique
   level       Int
   description String
+  modality    String?
   type        String?
   parent_id   Int?
 
@@ -157,8 +158,8 @@ model Supplier {
 model Immobilized {
   id                    String    @id @default(cuid())
   name                  String
-  currentValue         Decimal
-  estimatedValue       Decimal
+  currentValue          Decimal
+  estimatedValue        Decimal
   status                String
   avaliableAsCollateral Boolean   @default(false) @map("avaliable_as_collateral")
   depreciationRate      Decimal?  @map("depreciation_rate")
