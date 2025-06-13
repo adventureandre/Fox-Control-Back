@@ -17,7 +17,7 @@ export async function createImmobilized(
     acquisitionDate: z.coerce.date(),
     usefulLifeYears: z.number().optional(),
     notes: z.string().optional(),
-    producerId: z.string(),
+    producer_id: z.string(),
     active: z.boolean().optional(),
   })
 
@@ -26,7 +26,7 @@ export async function createImmobilized(
   try {
     const getProducerUseCase = makeGetProducerByIdUseCase()
     const response = await getProducerUseCase.execute({
-      id: immobilized.producerId,
+      producer_id: immobilized.producer_id,
     })
 
     if (!response.producer) {

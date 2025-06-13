@@ -47,18 +47,18 @@ export async function getBalance(request: FastifyRequest, reply: FastifyReply) {
       })
 
       if (category.type === 'despesa') {
-        resultBalanceNotCategory -= transaction.valor
+        resultBalanceNotCategory -= Number(transaction.valor)
       } else if (category.type === 'receita') {
-        resultBalanceNotCategory += transaction.valor
+        resultBalanceNotCategory += Number(transaction.valor)
       }
     }
 
     const resultBalanceWithCategory = transactionsnotCategory.reduce(
       (acc, transaction) => {
         if (transaction.tipo === 'despesa') {
-          return acc - transaction.valor
+          return acc - Number(transaction.valor)
         } else if (transaction.tipo === 'receita') {
-          return acc + transaction.valor
+          return acc + Number(transaction.valor)
         }
         return acc
       },

@@ -3,7 +3,7 @@ import { Producers } from '@prisma/client'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface GetProducerByIdUseCaseRequest {
-  id: string
+  producer_id: string
 }
 
 interface GetProducerByIdUseCaseResponse {
@@ -14,9 +14,9 @@ export class GetProducerByIdUseCase {
   constructor(private producerRepository: ProducerRepository) {}
 
   async execute({
-    id,
+    producer_id,
   }: GetProducerByIdUseCaseRequest): Promise<GetProducerByIdUseCaseResponse> {
-    const producer = await this.producerRepository.findById(id)
+    const producer = await this.producerRepository.findById(producer_id)
 
     if (!producer) {
       throw new ResourceNotFoundError()

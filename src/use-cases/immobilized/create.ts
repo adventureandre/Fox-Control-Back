@@ -10,7 +10,7 @@ interface CreateImmobilizedUseCaseRequest {
   acquisitionDate: Date
   usefulLifeYears?: number
   notes?: string
-  producerId: string
+  producer_id: string
   active?: boolean
 }
 
@@ -28,7 +28,7 @@ export class CreateImmobilizedUseCase {
       acquisitionDate: data.acquisitionDate,
       usefulLifeYears: data.usefulLifeYears ?? 0,
       notes: data.notes ?? '',
-      producer: { connect: { id: data.producerId } },
+      producer: { connect: { id: data.producer_id } },
       active: data.active ?? true,
     })
 

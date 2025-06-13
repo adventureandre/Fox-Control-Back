@@ -10,7 +10,7 @@ interface UpdateTransactionUseCaseRequest {
   categoria?: number | null
   conciliado?: boolean
   conta?: string
-  safra?: string
+  safra?: string | null
   imported?: boolean
   confirmed?: boolean
   producer_id?: string

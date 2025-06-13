@@ -13,7 +13,7 @@ export async function updateTransaction(
       z.string().transform((val) => parseFloat(parseFloat(val).toFixed(2))),
       z.number().transform((val) => parseFloat(val.toFixed(2))),
     ]),
-    safra: z.string().optional(),
+    safra: z.string().nullable().optional(),
     date: z.string().transform((val) => {
       if (val.includes('T')) {
         return new Date(val)

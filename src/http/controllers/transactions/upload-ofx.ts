@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { makeCreateTransactionsUseCase } from '@/use-cases/factories/transaction/make-create-transactions-use-case'
 import { extractTransactionsFormOFX } from '@/utils/parse-ofx-transactions'
-import { Transaction } from '@prisma/client'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { parse as parseOFX } from 'ofx-js'
 
@@ -38,7 +38,7 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
   try {
     // Parsear o conteúdo do OFX
     const parsedOfx = await parseOFX(fileBuffer.toString())
-    const transactions: Transaction[] = extractTransactionsFormOFX(parsedOfx)
+    const transactions = extractTransactionsFormOFX(parsedOfx)
 
     // Obtém o ID do usuário autenticado
     const userId = request.user.sub
@@ -48,7 +48,7 @@ export async function uploadOfx(request: FastifyRequest, reply: FastifyReply) {
 
     // Use Promise.all para esperar todas as transações serem criadas
     await Promise.all(
-      transactions.map((transaction) => {
+      transactions.map((transaction: any) => {
         // Converte a data para o formato ISO se for uma string de data
         let dateValue: string | Date = transaction.date as string | Date
         if (typeof dateValue === 'string') {
