@@ -160,7 +160,7 @@ model Immobilized {
   name                  String
   currentValue          Decimal   @map("current_value") @db.Decimal(15, 2)
   estimatedValue        Decimal   @map("estimated_value") @db.Decimal(15, 2)
-  status                String
+  status                String 
   avaliableAsCollateral Boolean   @default(false) @map("avaliable_as_collateral")
   depreciationRate      Decimal?  @map("depreciation_rate") @db.Decimal(5, 2)
   acquisitionDate       DateTime  @map("acquisition_date")
