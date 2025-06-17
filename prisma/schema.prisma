@@ -12,8 +12,6 @@ datasource db {
 //   MEMBER
 // }
 
-
-
 model User {
   id            String   @id @default(cuid())
   name          String
@@ -22,7 +20,6 @@ model User {
   status        String   @default("active")
   phone         String?
   password_hash String
-  // role          Role     @default(MEMBER)
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
 
@@ -161,12 +158,13 @@ model Immobilized {
   id                    String    @id @default(cuid())
   name                  String
   currentValue          Decimal   @map("current_value") @db.Decimal(15, 2)
-  estimatedValue        Decimal   @map("estimated_value") @db.Decimal(15, 2)
-  status                String 
+  status                String
+  owner                 String
+  type                  String?
+  manufacturer          String?
+  manufactureYear       Int?      @map("manufacture_year")
   avaliableAsCollateral Boolean   @default(false) @map("avaliable_as_collateral")
   depreciationRate      Decimal?  @map("depreciation_rate") @db.Decimal(5, 2)
-  acquisitionDate       DateTime  @map("acquisition_date")
-  usefulLifeYears       Int?      @map("useful_life_years")
   notes                 String?
   producer_id           String
   producer              Producers @relation(fields: [producer_id], references: [id])
@@ -176,4 +174,3 @@ model Immobilized {
 
   @@map("immobilized")
 }
-
