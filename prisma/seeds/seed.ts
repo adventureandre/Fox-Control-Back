@@ -1,7 +1,9 @@
 import { seedCategories } from './seed_category'
+import { seedMaquinario } from './seed_maquinario'
 
 async function main() {
   await seedCategories()
+  await seedMaquinario()
 }
 
 main()

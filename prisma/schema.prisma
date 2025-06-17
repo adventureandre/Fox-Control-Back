@@ -47,6 +47,7 @@ model Producers {
   Transaction Transaction[]
   Farm        Farm[]
   Immobilized Immobilized[]
+  Inventory   Inventory[]
 
   @@map("producers")
 }
@@ -166,11 +167,28 @@ model Immobilized {
   avaliableAsCollateral Boolean   @default(false) @map("avaliable_as_collateral")
   depreciationRate      Decimal?  @map("depreciation_rate") @db.Decimal(5, 2)
   notes                 String?
+  active                Boolean   @default(true)
+
   producer_id           String
   producer              Producers @relation(fields: [producer_id], references: [id])
-  active                Boolean   @default(true)
   created_at            DateTime  @default(now())
   updated_at            DateTime  @updatedAt
 
   @@map("immobilized")
+}
+
+model Inventory {
+  id              String    @id @default(cuid())
+  crop            String
+  quantity        Int
+  average_price   Decimal   @db.Decimal(15, 2)
+  estimated_value Decimal   @db.Decimal(15, 2)
+  active          Boolean   @default(true)
+
+  producer_id     String
+  producer        Producers @relation(fields: [producer_id], references: [id])
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+
+  @@map("inventory")
 }
