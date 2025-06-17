@@ -3,15 +3,17 @@ import { ImmobilizedRepository } from '@/repositories/immobilized-repository'
 interface CreateImmobilizedUseCaseRequest {
   name: string
   currentValue: number
-  estimatedValue: number
   status: string
+  owner?: string
+  type?: string
   avaliableAsCollateral?: boolean
   depreciationRate?: number
-  acquisitionDate: Date
-  usefulLifeYears?: number
   notes?: string
+  manufactureYear?: number
+  manufacturer?: string
   producer_id: string
   active?: boolean
+  usefulLifeYears?: number
 }
 
 export class CreateImmobilizedUseCase {
@@ -21,12 +23,13 @@ export class CreateImmobilizedUseCase {
     const immobilized = await this.immobilizedRepository.create({
       name: data.name,
       currentValue: data.currentValue,
-      estimatedValue: data.estimatedValue,
       status: data.status,
       avaliableAsCollateral: data.avaliableAsCollateral ?? false,
       depreciationRate: data.depreciationRate ?? 0,
-      acquisitionDate: data.acquisitionDate,
-      usefulLifeYears: data.usefulLifeYears ?? 0,
+      owner: data.owner ?? '',
+      type: data.type ?? '',
+      manufactureYear: data.manufactureYear ?? null,
+      manufacturer: data.manufacturer ?? '',
       notes: data.notes ?? '',
       producer: { connect: { id: data.producer_id } },
       active: data.active ?? true,

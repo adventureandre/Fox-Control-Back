@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client'
 import { ImmobilizedRepository } from '@/repositories/immobilized-repository'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
@@ -6,14 +5,16 @@ interface UpdateImmobilizedUseCaseRequest {
   id: string
   name?: string
   currentValue?: number
-  estimatedValue?: number
   status?: string
+  owner?: string
+  type?: string
   avaliableAsCollateral?: boolean
   depreciationRate?: number
-  acquisitionDate?: Date
-  usefulLifeYears?: number
   notes?: string
+  manufactureYear?: number
+  manufacturer?: string
   active?: boolean
+  usefulLifeYears?: number
 }
 
 export class UpdateImmobilizedUseCase {

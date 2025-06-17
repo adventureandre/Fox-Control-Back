@@ -8,16 +8,22 @@ export async function createImmobilized(
   replay: FastifyReply,
 ) {
   const shcemaImmobilized = z.object({
-    name: z.string(),
-    currentValue: z.number(),
-    estimatedValue: z.number(),
-    status: z.string(),
+    name: z.string().min(1, 'Nome é obrigatório.'),
+    currentValue: z
+      .number()
+      .min(0, 'Valor atual deve ser maior ou igual a zero.'),
+    status: z.string().min(1, 'Status é obrigatório.'),
+    owner: z.string().min(1, 'Dono é obrigatório.'),
+    type: z.string().optional(),
+    manufacturer: z.string().optional(),
+    manufactureYear: z.number().int().optional(),
     avaliableAsCollateral: z.boolean().optional(),
-    depreciationRate: z.number().optional(),
-    acquisitionDate: z.coerce.date(),
-    usefulLifeYears: z.number().optional(),
+    depreciationRate: z
+      .number()
+      .min(0, 'Taxa de depreciação deve ser maior ou igual a zero.')
+      .optional(),
     notes: z.string().optional(),
-    producer_id: z.string(),
+    producer_id: z.string().cuid('ID do produtor inválido.'),
     active: z.boolean().optional(),
   })
 
