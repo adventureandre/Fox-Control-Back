@@ -4,31 +4,44 @@ import { z } from 'zod'
 
 export async function update(request: FastifyRequest, reply: FastifyReply) {
   const updateInventoryParamsSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string().cuid(),
   })
 
   const updateInventoryBodySchema = z.object({
-    name: z.string().optional(),
-    description: z.string().optional(),
+    crop: z.string().optional(),
     quantity: z.number().optional(),
-    unit: z.string().optional(),
-    category_id: z.string().optional(),
+    average_price: z.number().optional(),
+    estimated_value: z.number().optional(),
+    producer_id: z.string().optional(),
+    active: z.boolean().optional(),
   })
 
-  const { id } = updateInventoryParamsSchema.parse(request.params)
-  const { name, description, quantity, unit, category_id } =
-    updateInventoryBodySchema.parse(request.body)
+  try {
+    const { id } = updateInventoryParamsSchema.parse(request.params)
+    const data = updateInventoryBodySchema.parse(request.body)
 
-  const updateInventoryUseCase = makeUpdateInventoryUseCase()
+    const updateInventoryUseCase = makeUpdateInventoryUseCase()
 
-  await updateInventoryUseCase.execute({
-    id,
-    name,
-    description,
-    quantity,
-    unit,
-    category_id,
-  })
+    const response = await updateInventoryUseCase.execute({ ...data, id })
 
-  return reply.status(204).send()
+    return reply.status(201).send({
+      status: 'success',
+      message: 'Inventory updated successfully',
+      data: response.inventory,
+    })
+  } catch (error) {
+    console.error('Error updating inventory:', error)
+    if (error instanceof z.ZodError) {
+      return reply.status(400).send({
+        status: 'error',
+        message: 'Invalid data',
+        errors: error.format(),
+      })
+    }
+
+    return reply.status(500).send({
+      status: 'error',
+      message: 'Internal server error',
+    })
+  }
 }

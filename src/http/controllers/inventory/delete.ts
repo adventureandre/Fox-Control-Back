@@ -4,7 +4,7 @@ import { makeDeleteInventoryUseCase } from '@/use-cases/factories/make-delete-in
 
 export async function remove(request: FastifyRequest, reply: FastifyReply) {
   const deleteInventoryParamsSchema = z.object({
-    id: z.string().uuid(),
+    id: z.string().cuid(),
   })
 
   const { id } = deleteInventoryParamsSchema.parse(request.params)
